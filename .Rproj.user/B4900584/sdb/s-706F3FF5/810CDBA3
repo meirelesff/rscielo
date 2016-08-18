@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: rScielo\nType: Package\nTitle: A Scraper for Scientific Journals Hosted on Scielo\nVersion: 0.1.0\nAuthors@R: c(\n    person(\"Fernando\", \"Meireles\", , \"fmeireles@ufmg.br\", c(\"aut\", \"cre\"))\n    )\nDescription: Scrapes meta-data from\n    scientific articles hosted on the Scientific Electronic Library Online Platform (Scielo).\n    The meta-data information includes author's names, articles' titles, year of\n    the publication, among others. The package also provides additional functions to\n    summarize the scraped data.\nLicense: GPL (>= 2)\nDepends:\n    R (>= 2.10)\nImports:\n    magrittr,\n    xml2,\n    rvest,\n    httr\nLazyData: TRUE\nURL: https://github.com/meirelesff/rScielo\nBugReports: https://github.com/meirelesff/rScielo/issues\nRoxygenNote: 5.0.1\n",
+    "created" : 1471491130181.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2038043542",
+    "id" : "810CDBA3",
+    "lastKnownWriteTime" : 1471491294,
+    "last_content_update" : 1471491294252,
+    "path" : "E:/Nova pasta/rScielo/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
