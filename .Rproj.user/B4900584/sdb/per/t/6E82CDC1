@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "rScielo\n=====\n\n[![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)\n\n`rScielo` provides a set of functions to scrap meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scraped data.\n\n\n### How does it work?\n\nThe `rScielo` package contains a main function to scrap meta-data from a journal hosted on Scielo: `get_journal()`. To extract the me\n\n\n\n### Installation\n\nFor the time being, `rScielo` is only available at [GitHub](https://github.com/). You can install this pre-release version via:\n\n``` {.r}\nif (!require(\"devtools\")) install.packages(\"devtools\")\ndevtools::install_github(\"meirelesff/rScielo\")\n```\n\n\n### Author\n\n[Fernando Meirels](http://www.fmeireles.com)\n\n### License\n\nGPL (>= 2)\n",
+    "created" : 1471491491056.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4311074",
+    "id" : "6E82CDC1",
+    "lastKnownWriteTime" : 1471491754,
+    "last_content_update" : 1471491754588,
+    "path" : "~/GitHub/rScielo/README.md",
+    "project_path" : "README.md",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}
