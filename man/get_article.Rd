@@ -13,7 +13,19 @@ get_article(url)
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
 
 \itemize{
-  \item DATA_GERACAO: Generation date of the file (when the data was collected).
+  \item author: Author name.
+  \item title: Article title.
+  \item year: Year of publication.
+  \item journal: Journal name.
+  \item volume: Volume.
+  \item number: Number.
+  \item first_page: Article's first page.
+  \item last_page: Article's last page
+  \item abstratc: Article's abstract.
+  \item keywords: Article's keywords.
+  \item doi: DOI.
+  \item n_authors: Number of authors.
+  \item n_pages: Number of pages.
 }
 }
 \description{

@@ -10,7 +10,19 @@
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
 #'
 #' \itemize{
-#'   \item DATA_GERACAO: Generation date of the file (when the data was collected).
+#'   \item author: Author name.
+#'   \item title: Article title.
+#'   \item year: Year of publication.
+#'   \item journal: Journal name.
+#'   \item volume: Volume.
+#'   \item number: Number.
+#'   \item first_page: Article's first page.
+#'   \item last_page: Article's last page
+#'   \item abstratc: Article's abstract.
+#'   \item keywords: Article's keywords.
+#'   \item doi: DOI.
+#'   \item n_authors: Number of authors.
+#'   \item n_pages: Number of pages.
 #' }
 #'
 #' @details This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.
@@ -110,16 +122,17 @@ get_xml_article <- function(link) {
 
 
 
-# @S3method summary
-summary.Scielo <- function(x, ...) {
+# @S3 summary
+#' @export
+summary.Scielo <- function(object, ...) {
 
 
-  journal <- as.character(x$journal[1])
-  total <- nrow(x)
-  total_articles <- nrow(x[nchar(as.character(x$abstract)) > 1,])
-  years <- range(as.numeric(as.character(x$year)), na.rm = T)
-  mean_authors <- round(mean(x$n_authors[nchar(as.character(x$abstract)) > 1], na.rm = T), 2)
-  mean_size <- round(mean(x$n_pages[nchar(as.character(x$abstract)) > 1], na.rm = T), 2)
+  journal <- as.character(object$journal[1])
+  total <- nrow(object)
+  total_articles <- nrow(object[nchar(as.character(object$abstract)) > 1,])
+  years <- range(as.numeric(as.character(object$year)), na.rm = T)
+  mean_authors <- round(mean(object$n_authors[nchar(as.character(object$abstract)) > 1], na.rm = T), 2)
+  mean_size <- round(mean(object$n_pages[nchar(as.character(object$abstract)) > 1], na.rm = T), 2)
 
   out <- list(journal = journal,
               total = total,
@@ -135,7 +148,8 @@ summary.Scielo <- function(x, ...) {
 
 
 
-# @S3method print
+# @S3 print
+#' @export
 print.summary.Scielo <- function(x, ...){
 
 
