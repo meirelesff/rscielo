@@ -73,7 +73,7 @@ With the `rScielo`, it is possible to scrape several publication and citation me
 cit <- get_journal_metrics("1981-3821")
 
 # Plots the data for a quick visualization
-plot(ci)
+plot(cit)
 ```
 
 ### Functions
