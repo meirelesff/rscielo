@@ -6,8 +6,7 @@ rScielo
 
 `rScielo` provides a set of functions to scrape meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scrapped data.
 
-How does it work?
------------------
+### How does it work?
 
 #### Getting a journal's ID
 
@@ -65,6 +64,18 @@ meta_info <- get_journal_info("1981-3821")
 journals <- get_journal_list()
 ```
 
+#### Scraping metrics
+
+With the `rScielo`, it is possible to scrape several publication and citation metrics of a journal hosted on [Scielo](http://www.scielo.br/):
+
+``` r
+# Gets citation metrics
+cit <- get_journal_metrics("1981-3821")
+
+# Plots the data for a quick visualization
+plot(ci)
+```
+
 ### Functions
 
 Here is a description of the `rScielo` functions:
@@ -74,9 +85,9 @@ Here is a description of the `rScielo` functions:
 -   `get_article()`: Gets meta-data from a single article.
 -   `get_journal_info()`: Gets a journal's description.
 -   `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
+-   `get_journal_metrics()`: Gets publication and citation metrics of a journal.
 
-Installation
-------------
+### Installation
 
 Install the latest stable release from [CRAN](http://cran.r-project.org/) via:
 
@@ -91,17 +102,10 @@ if (!require("devtools")) install.packages("devtools")
 devtools::install_github("meirelesff/rScielo")
 ```
 
-Author
-------
+### Author
 
 [Fernando Meireles](http://www.fmeireles.com)
 
-License
--------
+### License
 
 GPL (&gt;= 2)
-
-Note
-----
-
-The [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/) website is licensed under a Creative Commons Attribution License. ![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)(<http://creativecommons.org/licenses/by/4.0/>).

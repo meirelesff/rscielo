@@ -85,17 +85,14 @@ journals <- get_journal_list()
 
 #### Scraping metrics
 
-With the `rScielo`, it is possible to scrape several publication and citation metrics from a journal hosted on [Scielo](http://www.scielo.br/):
+With the `rScielo`, it is possible to scrape several publication and citation metrics of a journal hosted on [Scielo](http://www.scielo.br/):
 
-```{r, message=FALSE, warning=FALSE, results='hide'}
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+# Gets citation metrics
 cit <- get_journal_metrics("1981-3821")
 
-```
-
-To visualize the citations granted and received aggregated by year, just use the `plot()` function:
-
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-plot(cit)
+# Plots the data for a quick visualization
+plot(ci)
 
 ```
 
@@ -109,6 +106,7 @@ Here is a description of the `rScielo` functions:
 * `get_article()`: Gets meta-data from a single article.
 * `get_journal_info()`: Gets a journal's description.
 * `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
+* `get_journal_metrics()`: Gets publication and citation metrics of a journal.
 
 
 ### Installation
