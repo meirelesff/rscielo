@@ -2,7 +2,7 @@
 rScielo
 =======
 
-[![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![Travis-CI Build Status](https://travis-ci.org/meirelesff/rScielo.svg?branch=master)](https://travis-ci.org/meirelesff/rScielo) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/rScielo?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/rScielo) [![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 
 `rScielo` provides a set of functions to scrap meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scraped data.
 
