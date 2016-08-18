@@ -55,13 +55,6 @@ summary(df)
 
 ```
 
-Or use the resulting object as a `data.frame`
-
-```{r, message=FALSE, warning=FALSE}
-str(df)
-
-```
-
 
 The `rScielo` package also provides a function to scrap meta-data from a single article:
 

@@ -44,38 +44,15 @@ Then summarize the scraped data with `summary`:
 
 ``` r
 summary(df)
-#>     author             title               year          
-#>  Length:98          Length:98          Length:98         
-#>  Class :character   Class :character   Class :character  
-#>  Mode  :character   Mode  :character   Mode  :character  
-#>                                                          
-#>                                                          
-#>                                                          
-#>                                                          
-#>    journal             volume             number            first_page    
-#>  Length:98          Length:98          Length:98          Min.   :  3.00  
-#>  Class :character   Class :character   Class :character   1st Qu.: 42.00  
-#>  Mode  :character   Mode  :character   Mode  :character   Median : 94.00  
-#>                                                           Mean   : 90.59  
-#>                                                           3rd Qu.:133.00  
-#>                                                           Max.   :186.00  
-#>                                                           NA's   :17      
-#>    last_page       abstract           keywords             doi           
-#>  Min.   : 20.0   Length:98          Length:98          Length:98         
-#>  1st Qu.: 65.0   Class :character   Class :character   Class :character  
-#>  Median :117.0   Mode  :character   Mode  :character   Mode  :character  
-#>  Mean   :111.3                                                           
-#>  3rd Qu.:140.0                                                           
-#>  Max.   :460.0                                                           
-#>  NA's   :17                                                              
-#>    n_authors       n_pages      
-#>  Min.   :1.00   Min.   :  2.00  
-#>  1st Qu.:1.00   1st Qu.:  5.00  
-#>  Median :1.00   Median : 21.00  
-#>  Mean   :1.48   Mean   : 20.69  
-#>  3rd Qu.:2.00   3rd Qu.: 26.00  
-#>  Max.   :7.00   Max.   :315.00  
-#>                 NA's   :17
+#> 
+#> ### JOURNAL SUMMARY: Brazilian Political Science Review (2012 - 2016)
+#> 
+#> 
+#>  Total number of articles:  98 
+#>  Total number of articles (reviews excluded):  67
+#> 
+#>  Mean number of authors per article:  1.61 
+#>  Mean number of pages per article:  29.38
 ```
 
 Or use the resulting object as a `data.frame`
