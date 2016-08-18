@@ -4,9 +4,10 @@ rScielo
 
 [![Travis-CI Build Status](https://travis-ci.org/meirelesff/rScielo.svg?branch=master)](https://travis-ci.org/meirelesff/rScielo) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/rScielo?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/rScielo) [![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rScielo)](https://cran.r-project.org/package=rScielo)
 
-`rScielo` provides a set of functions to scrape meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scrapped data.
+`rScielo` provides a set of functions to scrape meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scrapped data.
 
-### How does it work?
+How does it work?
+-----------------
 
 #### Getting a journal's ID
 
@@ -74,7 +75,8 @@ Here is a description of the `rScielo` functions:
 -   `get_journal_info()`: Gets a journal's description.
 -   `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
 
-### Installation
+Installation
+------------
 
 Install the latest stable release from [CRAN](http://cran.r-project.org/) via:
 
@@ -89,10 +91,17 @@ if (!require("devtools")) install.packages("devtools")
 devtools::install_github("meirelesff/rScielo")
 ```
 
-### Author
+Author
+------
 
 [Fernando Meireles](http://www.fmeireles.com)
 
-### License
+License
+-------
 
 GPL (&gt;= 2)
+
+Note
+----
+
+The [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/) website is licensed under a Creative Commons Attribution License. ![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)(<http://creativecommons.org/licenses/by/4.0/>).

@@ -8,7 +8,10 @@ library(rScielo)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-",
+  ev = "png", 
+  dev.args = list(type = "cairo"),
+  dpi = 96
 )
 ```
 
@@ -17,7 +20,7 @@ rScielo
 
 [![Travis-CI Build Status](https://travis-ci.org/meirelesff/rScielo.svg?branch=master)](https://travis-ci.org/meirelesff/rScielo) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/rScielo?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/rScielo) [![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rScielo)](https://cran.r-project.org/package=rScielo)
 
-`rScielo` provides a set of functions to scrape meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scrapped data.
+`rScielo` provides a set of functions to scrape meta-data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/). The meta-data information includes author's names, articles' titles, year of the publication, among others. The package also provides additional functions to summarize the scrapped data.
 
 
 ### How does it work?
@@ -76,6 +79,23 @@ meta_info <- get_journal_info("1981-3821")
 
 # Get a list with all journals names, URLs and IDs
 journals <- get_journal_list()
+
+```
+
+
+#### Scraping metrics
+
+With the `rScielo`, it is possible to scrape several publication and citation metrics from a journal hosted on [Scielo](http://www.scielo.br/):
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
+cit <- get_journal_metrics("1981-3821")
+
+```
+
+To visualize the citations granted and received aggregated by year, just use the `plot()` function:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot(cit)
 
 ```
 
