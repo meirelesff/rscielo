@@ -7,7 +7,7 @@
 get_journal_info(id_journal)
 }
 \arguments{
-\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its url).}
+\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
 }
 \value{
 The function returns a \code{data.frame} with the journal's description.

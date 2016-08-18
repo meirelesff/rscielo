@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Rstudio files
+.Rproj.user
+.Rhistory
+.RData
+*.Rproj
+README.html
+.Rprofile

@@ -1,8 +1,8 @@
-#' Scrape meta-data from a unique article hosted on Scielo
+#' Scrape meta-data from a single article hosted on Scielo
 #'
-#' \code{get_article()} scrapes meta-data information of an article hosted on Scielo.
+#' \code{get_article()} scrapes meta-data information from an article hosted on Scielo.
 #'
-#' @param url a character vector with the link of the article hosted on Scielo to be scraped.
+#' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
 #'
 #' @importFrom magrittr "%>%"
 #' @export

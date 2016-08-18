@@ -2,7 +2,7 @@
 #'
 #' \code{get_journal_info()} scrapes the description (publisher, issn, and mission) information of a journal hosted on Scielo.
 #'
-#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its url).
+#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).
 #'
 #' @importFrom magrittr "%>%"
 #' @export

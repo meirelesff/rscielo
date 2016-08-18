@@ -7,10 +7,10 @@
 get_journal_list()
 }
 \value{
-The function returns a \code{data.frame} with each journal's title, ID, and url.
+The function returns a \code{data.frame} with each journal's title, ID, and URL
 }
 \description{
-\code{get_journal_list()} scrapes the title, numerical ID (pid) and url of all journals hosted on Scielo.
+\code{get_journal_list()} scrapes the title, numerical ID (pid) and URL of all journals hosted on Scielo.
 }
 \examples{
 \dontrun{

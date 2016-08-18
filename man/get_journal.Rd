@@ -7,7 +7,7 @@
 get_journal(id_journal)
 }
 \arguments{
-\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its url).}
+\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
@@ -29,7 +29,7 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_journal()} scrapes meta-data information of a journal hosted on Scielo.
+\code{get_journal()} scrapes meta-data information from all the articles of a journal hosted on Scielo.
 }
 \details{
 This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.

@@ -1,11 +1,11 @@
 #' Scrape a list with all the journals hosted on Scielo
 #'
-#' \code{get_journal_list()} scrapes the title, numerical ID (pid) and url of all journals hosted on Scielo.
+#' \code{get_journal_list()} scrapes the title, numerical ID (pid) and URL of all journals hosted on Scielo.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
 #'
-#' @return The function returns a \code{data.frame} with each journal's title, ID, and url.
+#' @return The function returns a \code{data.frame} with each journal's title, ID, and URL
 #'
 #' @examples
 #' \dontrun{

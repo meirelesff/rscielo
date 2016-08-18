@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_article.R
 \name{get_article}
 \alias{get_article}
-\title{Scrape meta-data from a unique article hosted on Scielo}
+\title{Scrape meta-data from a single article hosted on Scielo}
 \usage{
 get_article(url)
 }
 \arguments{
-\item{url}{a character vector with the link of the article hosted on Scielo to be scraped.}
+\item{url}{a character vector with the link of the article hosted on Scielo to be scrapped.}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
@@ -29,7 +29,7 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_article()} scrapes meta-data information of an article hosted on Scielo.
+\code{get_article()} scrapes meta-data information from an article hosted on Scielo.
 }
 \details{
 This functions scrapes several meta-data information, such as author's names, article title, year of publication, edition and number of pages.

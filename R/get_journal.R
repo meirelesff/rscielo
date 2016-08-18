@@ -1,8 +1,8 @@
 #' Scrape meta-data from all the articles of a journal hosted on Scielo
 #'
-#' \code{get_journal()} scrapes meta-data information of a journal hosted on Scielo.
+#' \code{get_journal()} scrapes meta-data information from all the articles of a journal hosted on Scielo.
 #'
-#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its url).
+#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).
 #'
 #' @importFrom magrittr "%>%"
 #' @export
