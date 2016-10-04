@@ -12,13 +12,13 @@ Description: Scrapes meta-data from
     summarize the scraped data.
 License: GPL (>= 2)
 Depends:
-    R (>= 2.10)
+    R (>= 3.0.1)
 Imports:
     graphics,
     magrittr,
     xml2,
-    rvest,
-    httr
+    httr (>= 0.5),
+    rvest
 LazyData: TRUE
 URL: https://github.com/meirelesff/rScielo
 BugReports: https://github.com/meirelesff/rScielo/issues

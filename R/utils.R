@@ -7,6 +7,9 @@ get_xml_article <- function(link) {
 
   lastname <- extract_node(page, "//article-meta/contrib-group/contrib/name/surname")
   firstname <- extract_node(page, "//article-meta/contrib-group/contrib/name/given-names")
+  institution <- extract_node(page, "//article-meta/aff/institution")
+  adress <- extract_node(page, "//article-meta/aff/addr-line")
+  country <- extract_node(page, "//article-meta/aff/country")
   title <- extract_node(page, "//article-meta/title-group/article-title")
   year <- extract_node(page, "//article-meta/pub-date/year")
   journal <- extract_node(page, "//journal-title")
@@ -17,8 +20,13 @@ get_xml_article <- function(link) {
   doi <- extract_node(page, "//article-meta/article-id[@pub-id-type = 'doi']")
   f_pag <- extract_node(page, "//article-meta/fpage") %>% as.numeric()
   l_pag <- extract_node(page, "//article-meta/lpage") %>% as.numeric()
+  n_refs <- extract_node(page, "//ref-list/ref") %>% length()
 
   res <- data.frame(author = paste(firstname, lastname, collapse = "; ") %>% utf8(),
+                    first_author_surname = lastname[1] %>% utf8(),
+                    institution = paste(institution, collapse = "; ") %>% utf8(),
+                    inst_adress = paste(adress, collapse = "; ") %>% utf8(),
+                    country = paste(country, collapse = "; ") %>% utf8(),
                     title = utf8(title[1]),
                     year = year[1],
                     journal = utf8(journal),
@@ -31,6 +39,7 @@ get_xml_article <- function(link) {
                     doi = doi,
                     n_authors = length(firstname),
                     n_pages = l_pag - f_pag,
+                    n_refs = n_refs,
                     stringsAsFactors = F)
 
   res

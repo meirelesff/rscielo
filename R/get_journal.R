@@ -11,6 +11,10 @@
 #'
 #' \itemize{
 #'   \item author: Author name.
+#'   \item first_author_surname: First author surname.
+#'   \item institution: Author's institution.
+#'   \item inst_adress: Author's institution address.
+#'   \item country: Author's country.
 #'   \item title: Article title.
 #'   \item year: Year of publication.
 #'   \item journal: Journal name.
@@ -23,6 +27,7 @@
 #'   \item doi: DOI.
 #'   \item n_authors: Number of authors.
 #'   \item n_pages: Number of pages.
+#'   \item n_refs: Number of references.
 #' }
 #'
 #' @details This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.
