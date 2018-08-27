@@ -2,6 +2,7 @@
 
 S3method(plot,Scielo_metrics)
 export(get_articleMetaData)
+export(get_articleText)
 export(get_id_journal)
 export(get_journalMetaList)
 export(get_journal_info)

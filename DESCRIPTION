@@ -15,11 +15,15 @@ License: GPL (>= 2)
 Depends:
     R (>= 3.0.1)
 Imports:
+    dplyr,
     graphics,
-    magrittr,
-    xml2,
     httr (>= 0.5),
-    rvest
+    magrittr,
+    purrr,
+    rvest,
+    stringr,
+    tibble,
+    xml2
 LazyData: TRUE
 URL: https://github.com/meirelesff/rScielo
 BugReports: https://github.com/meirelesff/rScielo/issues

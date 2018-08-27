@@ -13,20 +13,18 @@ get_journalMetaList(id_journal)
 The function returns an object of class \code{Scielo, list} with the following variables:
 
 \itemize{
-  \item author: Author name.
-  \item first_author_surname: First author surname.
-  \item institution: Author's institution.
-  \item inst_adress: Author's institution address.
-  \item country: Author's country.
-  \item title: Article title.
+  \item authors: A data.frame with authors names and last names.
+  \item institutions: A list about the author's institutions.
+  \item title: A data.frame with the article title in all available languages.
+  \item abstract: A data.frame with the article's abstract in all available languages.
+  \item keywords: A data.frame with the article's keywords in all available languages.
   \item year: Year of publication.
   \item journal: Journal name.
-  \item volume: Volume.
-  \item number: Number.
-  \item first_page: Article's first page.
-  \item last_page: Article's last page
-  \item abstratc: Article's abstract.
-  \item keywords: Article's keywords.
+  \item volume: Journal Volume.
+  \item number: Journal Number.
+  \item first_page: Article's first page in the journal edition.
+  \item last_page: Article's last page in the journal edition.
+  \item scielo_id: Article's identification number in the Scielo Database.
   \item doi: DOI.
   \item n_authors: Number of authors.
   \item n_pages: Number of pages.
