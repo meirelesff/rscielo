@@ -9,7 +9,7 @@ get_xml_article <- function (link){
   }
 
   names        <- rvest:::html_nodes(page, xpath = "//article-meta/contrib-group/contrib/name")
-  authors_data <- rScielo:::nameList_to_dataFrame(as_list(names))
+  authors_data <- rScielo:::nameList_to_dataFrame(xml2::as_list(names))
 
   institution <- rScielo:::extract_node(page, "//article-meta/aff/institution")
   institution <- gsub(x           = trimws(institution),

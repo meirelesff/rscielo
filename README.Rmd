@@ -3,7 +3,7 @@ output: github_document
 ---
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
-devtools::install_github("meirelesff/rScielo")
+devtools::install_github("meirelesff/rScielo", ref = "testVersion")
 library(rScielo)
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -46,15 +46,7 @@ get_id_journal("http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&
 To scrape meta-data from all articles of a journal hosted on [Scielo](http://www.scielo.br/), use the `get_journal()` function:
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
-df <- get_journal("1981-3821")
-
-```
-
-Then summarize the scrapped data with `summary`:
-
-
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-summary(df)
+df <- get_journalMetaList("1981-3821")
 
 ```
 
@@ -67,7 +59,7 @@ The `rScielo` package also provides a function to scrape meta-data from a single
 url <- "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en"
 
 # Scrape the data
-article <- get_article(url)
+article <- get_articleMetaData(url)
 
 ```
 
@@ -99,11 +91,11 @@ plot(cit)
 
 ### Functions
 
-Here is a description of the `rScielo` functions:
+Here it is a short description of the `rScielo` functions:
 
 * `get_id_journal()`: Gets a journal's ID from its url.
-* `get_journal()`: Gets meta-data from all articles published by a journal.
-* `get_article()`: Gets meta-data from a single article.
+* `get_journalMetaList()`: Gets meta-data from all articles published by a journal.
+* `get_articleMetaData()`: Gets meta-data from a single article.
 * `get_journal_info()`: Gets a journal's description.
 * `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
 * `get_journal_metrics()`: Gets publication and citation metrics of a journal.
@@ -122,14 +114,17 @@ Alternatively, install the latest pre-release version from [GitHub](https://gith
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("meirelesff/rScielo")
+devtools::install_github("meirelesff/rScielo", ref = "testVersion")
 ```
 
 
-### Author
+### Authors
 
 [Fernando Meireles](http://www.fmeireles.com)
+[Rogério J Barbosa](https://sociaisemetodos.wordpress.com/)
 
 ### License
 
 GPL (>= 2)
+
+
