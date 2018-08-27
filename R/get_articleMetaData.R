@@ -11,7 +11,7 @@
 #'
 #' \itemize{
 #'   \item authors: A data.frame with authors names and last names.
-#'   \item institutions: A data.frame about the author's institutions.
+#'   \item institutions: A list about the author's institutions.
 #'   \item title: A data.frame with the article title in all available languages.
 #'   \item abstract: A data.frame with the article's abstract in all available languages.
 #'   \item keywords: A data.frame with the article's keywords in all available languages.
