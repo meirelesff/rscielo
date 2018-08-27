@@ -20,4 +20,3 @@ The function returns a \code{data.frame} with the journal's description.
 journal_info <- get_journal_info(id_journal = "1981-3821")
 }
 }
-

@@ -21,4 +21,3 @@ id <- get_id_journal(url = "http://www.scielo.br/scielo.php?
 script=sci_serial&pid=1981-3821&lng=en&nrm=iso")
 }
 }
-
