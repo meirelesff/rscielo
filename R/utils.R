@@ -16,7 +16,9 @@ get_xml_article <- function(link) {
   volume <- extract_node(page, "//article-meta/volume")
   number <- extract_node(page, "//article-meta/numero")
   abstract <- extract_node(page, "//article-meta/abstract/p")
-  keywords <- extract_node(page, "//article-meta/kwd-group/kwd")
+  keywords_pt <- extract_node(page, "//article-meta/kwd-group/kwd[@lng='pt']")
+  keywords_en <- extract_node(page, "//article-meta/kwd-group/kwd[@lng='en']")
+  keywords_es <- extract_node(page, "//article-meta/kwd-group/kwd[@lng='es']")
   doi <- extract_node(page, "//article-meta/article-id[@pub-id-type = 'doi']")
   f_pag <- extract_node(page, "//article-meta/fpage") %>% as.numeric()
   l_pag <- extract_node(page, "//article-meta/lpage") %>% as.numeric()
@@ -35,7 +37,9 @@ get_xml_article <- function(link) {
                     first_page = f_pag,
                     last_page = l_pag,
                     abstract = utf8(abstract[1]),
-                    keywords = paste(keywords, collapse = "; ") %>% utf8(),
+                    keywords_pt = paste(keywords_pt, collapse = "; ") %>% utf8(),
+                    keywords_en = paste(keywords_en, collapse = "; ") %>% utf8(),
+                    keywords_es = paste(keywords_es, collapse = "; ") %>% utf8(),
                     doi = doi,
                     n_authors = length(firstname),
                     n_pages = l_pag - f_pag,
