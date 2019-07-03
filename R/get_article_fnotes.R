@@ -1,6 +1,6 @@
-#' Scrape text from a single article hosted on Scielo
+#' Scrape foot notes from a single article hosted on Scielo
 #'
-#' \code{get_article()} scrapes text from an article hosted on Scielo.
+#' \code{get_article_fnotes()} scrapes foot note information from an article hosted on Scielo.
 #'
 #' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
 #'
@@ -10,31 +10,33 @@
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
 #'
 #' \itemize{
-#'   \item text: content
+#'   \item foot note: foot note
 #'   \item doi: DOI.
 #' }
 #'
 #'
 #' @examples
 #' \dontrun{
-#' article <- get_article(url = "http://www.scielo.br/scielo.php?
+#' get_article_fnotes <- get_article_fnotes(url = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-#' summary(article)
+#' summary(get_article_fnotes)
 #' }
 
-get_article <- function(url){
+get_article_fnotes <- function(url){
 
   if(!is.character(url)) stop("'link' must be a character vector.")
   page <- rvest::html_session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
-  text <- rvest::html_nodes(page, xpath = "//div[@id='article-body']") %>%
-    rvest::html_text(text)
+  foot_notes <- rvest::html_nodes(page, xpath = "//div[@class='fn']") %>%
+   rvest::html_text() %>%
+   stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
+
 
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text(text)
 
-  df <- data.frame(text,
+  df <- data.frame(foot_notes,
                    doi,
                    stringsAsFactors = F)
 

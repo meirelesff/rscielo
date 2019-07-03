@@ -17,4 +17,3 @@ The function returns a \code{data.frame} with each journal's title, ID, and URL
 journal_list <- get_journal_list()
 }
 }
-

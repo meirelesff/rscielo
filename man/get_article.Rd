@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_article.R
 \name{get_article}
 \alias{get_article}
-\title{Scrape meta-data from a single article hosted on Scielo}
+\title{Scrape text from a single article hosted on Scielo}
 \usage{
 get_article(url)
 }
@@ -13,31 +13,12 @@ get_article(url)
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
 
 \itemize{
-  \item author: Author name.
-  \item first_author_surname: First author surname.
-  \item institution: Author's institution.
-  \item inst_adress: Author's institution address.
-  \item country: Author's country.
-  \item title: Article title.
-  \item year: Year of publication.
-  \item journal: Journal name.
-  \item volume: Volume.
-  \item number: Number.
-  \item first_page: Article's first page.
-  \item last_page: Article's last page
-  \item abstratc: Article's abstract.
-  \item keywords: Article's keywords.
+  \item text: content
   \item doi: DOI.
-  \item n_authors: Number of authors.
-  \item n_pages: Number of pages.
-  \item n_refs: Number of references.
 }
 }
 \description{
-\code{get_article()} scrapes meta-data information from an article hosted on Scielo.
-}
-\details{
-This functions scrapes several meta-data information, such as author's names, article title, year of publication, edition and number of pages.
+\code{get_article()} scrapes text from an article hosted on Scielo.
 }
 \examples{
 \dontrun{
@@ -46,4 +27,3 @@ script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 summary(article)
 }
 }
-

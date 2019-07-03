@@ -29,4 +29,3 @@ The function returns an object of class \code{data.frame} with the following var
 df <- get_journal_metrics(id_journal = "1981-3821")
 }
 }
-
