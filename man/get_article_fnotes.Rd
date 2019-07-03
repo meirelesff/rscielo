@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_article_fnotes.R
 \name{get_article_fnotes}
 \alias{get_article_fnotes}
-\title{Scrape foot notes from a single article hosted on Scielo}
+\title{Scrape footnotes from a single article hosted on Scielo}
 \usage{
 get_article_fnotes(url)
 }
@@ -13,17 +13,16 @@ get_article_fnotes(url)
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
 
 \itemize{
-  \item foot note: foot note
-  \item doi: DOI.
+  \item footnote: article's footnotes (\code{character}).
+  \item doi: article's Digital Object Identifier (\code{character}).
 }
 }
 \description{
-\code{get_article_fnotes()} scrapes foot note information from an article hosted on Scielo.
+\code{get_article_fnotes()} scrapes footnote information from an article hosted on Scielo.
 }
 \examples{
 \dontrun{
 get_article_fnotes <- get_article_fnotes(url = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-summary(get_article_fnotes)
 }
 }

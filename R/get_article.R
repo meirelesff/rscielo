@@ -10,8 +10,8 @@
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
 #'
 #' \itemize{
-#'   \item text: content
-#'   \item doi: DOI.
+#'   \item text: article's content (\code{character}).
+#'   \item doi: article's Digital Object Identifier (DOI, (\code{character})).
 #' }
 #'
 #'
@@ -19,7 +19,6 @@
 #' \dontrun{
 #' article <- get_article(url = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-#' summary(article)
 #' }
 
 get_article <- function(url){
@@ -34,11 +33,7 @@ get_article <- function(url){
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text(text)
 
-  df <- data.frame(text,
-                   doi,
-                   stringsAsFactors = F)
-
-  return(df)
+  data.frame(text, doi, stringsAsFactors = F)
 }
 
 

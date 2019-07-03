@@ -1,6 +1,6 @@
-#' Scrape foot notes from a single article hosted on Scielo
+#' Scrape footnotes from a single article hosted on Scielo
 #'
-#' \code{get_article_fnotes()} scrapes foot note information from an article hosted on Scielo.
+#' \code{get_article_fnotes()} scrapes footnote information from an article hosted on Scielo.
 #'
 #' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
 #'
@@ -10,8 +10,8 @@
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
 #'
 #' \itemize{
-#'   \item foot note: foot note
-#'   \item doi: DOI.
+#'   \item footnote: article's footnotes (\code{character}).
+#'   \item doi: article's Digital Object Identifier (\code{character}).
 #' }
 #'
 #'
@@ -19,7 +19,6 @@
 #' \dontrun{
 #' get_article_fnotes <- get_article_fnotes(url = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-#' summary(get_article_fnotes)
 #' }
 
 get_article_fnotes <- function(url){
@@ -32,15 +31,10 @@ get_article_fnotes <- function(url){
    rvest::html_text() %>%
    stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
 
-
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text(text)
 
-  df <- data.frame(foot_notes,
-                   doi,
-                   stringsAsFactors = F)
-
-  return(df)
+  data.frame(foot_notes, doi, stringsAsFactors = F)
 }
 
 

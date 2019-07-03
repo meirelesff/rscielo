@@ -36,7 +36,6 @@
 #' \dontrun{
 #' article_meta <- get_article_meta(url = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-#' summary(article_meta)
 #' }
 
 get_article_meta <- function(url){

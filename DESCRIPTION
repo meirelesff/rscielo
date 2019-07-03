@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre")),
     person("Denisson", "Silva", , "silvadenisson@ufmg.br", c("aut")),
-    person("Rogério", "Barbosa", , "antrologos@gmail.com", c("ctb"))
+    person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("ctb"))
     )
 Description: Scrapes meta-data from
     scientific articles hosted on the Scientific Electronic Library Online Platform (Scielo).
@@ -25,4 +25,4 @@ Imports:
 LazyData: TRUE
 URL: https://github.com/meirelesff/rscielo
 BugReports: https://github.com/meirelesff/rscielo/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

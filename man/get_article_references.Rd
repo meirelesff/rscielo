@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_article_references.R
 \name{get_article_references}
 \alias{get_article_references}
-\title{Scrape references from a single article hosted on Scielo}
+\title{Scrape bibliographic references from a single article hosted on Scielo}
 \usage{
 get_article_references(url)
 }
@@ -13,17 +13,16 @@ get_article_references(url)
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
 
 \itemize{
-  \item references: references
-  \item doi: DOI.
+  \item references: an article's bibliographic reference (\code{character}).
+  \item doi: article's Digital Object Identifier (DOI).
 }
 }
 \description{
-\code{get_article_references()} scrapes references information from an article hosted on Scielo.
+\code{get_article_references()} scrapes bibliographic references information from an article hosted on Scielo.
 }
 \examples{
 \dontrun{
 get_article_references <- get_article(url = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-summary(get_article_references)
 }
 }

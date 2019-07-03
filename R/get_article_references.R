@@ -1,6 +1,6 @@
-#' Scrape references from a single article hosted on Scielo
+#' Scrape bibliographic references from a single article hosted on Scielo
 #'
-#' \code{get_article_references()} scrapes references information from an article hosted on Scielo.
+#' \code{get_article_references()} scrapes bibliographic references information from an article hosted on Scielo.
 #'
 #' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
 #'
@@ -10,8 +10,8 @@
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
 #'
 #' \itemize{
-#'   \item references: references
-#'   \item doi: DOI.
+#'   \item references: an article's bibliographic reference (\code{character}).
+#'   \item doi: article's Digital Object Identifier (DOI).
 #' }
 #'
 #'
@@ -19,7 +19,6 @@
 #' \dontrun{
 #' get_article_references <- get_article(url = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
-#' summary(get_article_references)
 #' }
 
 get_article_references <- function(url){
@@ -36,11 +35,7 @@ get_article_references <- function(url){
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text(text)
 
-  df <- data.frame(references,
-                   doi,
-                   stringsAsFactors = F)
-
-  return(df)
+  data.frame(references, doi, stringsAsFactors = F)
 }
 
 
