@@ -1,9 +1,11 @@
-Package: rScielo
+Package: rscielo
 Type: Package
 Title: A Scraper for Scientific Journals Hosted on Scielo
 Version: 0.1.0
 Authors@R: c(
-    person("Fernando", "Meireles", , "fmeireles@ufmg.br", c("aut", "cre"))
+    person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre")),
+    person("Denisson", "Silva", , "silvadenisson@ufmg.br", c("aut")),
+    person("Rogério", "Barbosa", , "antrologos@gmail.com", c("ctb"))
     )
 Description: Scrapes meta-data from
     scientific articles hosted on the Scientific Electronic Library Online Platform (Scielo).
@@ -21,6 +23,6 @@ Imports:
     rvest,
     stringr
 LazyData: TRUE
-URL: https://github.com/meirelesff/rScielo
-BugReports: https://github.com/meirelesff/rScielo/issues
+URL: https://github.com/meirelesff/rscielo
+BugReports: https://github.com/meirelesff/rscielo/issues
 RoxygenNote: 6.0.1

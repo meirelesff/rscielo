@@ -59,7 +59,7 @@ plot.Scielo_metrics <- function(x, ...){
   y.max <- max(c(x$granted_citations, x$received_citations), na.rm = T) + 10
 
   plot(x$year, x$granted_citations, type = "o", ylim = c(0, y.max), bty = "l", pch = 19, col = "#1693A5",
-       cex.lab = 1.4, cex.main = 1.5, family = "mono", lwd = 1.3, main = "Number of citations",
+       cex.lab = 1.4, cex.main = 1.5, lwd = 1.3, main = "Number of citations",
        xlab = "Year", ylab = "Citations")
 
   lines(x$year, x$received_citations, col = "#FBB829", type = "o", pch = 19, lwd = 1.3)
