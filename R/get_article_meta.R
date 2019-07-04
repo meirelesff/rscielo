@@ -2,7 +2,7 @@
 #'
 #' \code{get_article_meta()} scrapes meta-data information from an article hosted on Scielo.
 #'
-#' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
+#' @param x a character vector with the link or id of the article hosted on Scielo to be scrapped.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
