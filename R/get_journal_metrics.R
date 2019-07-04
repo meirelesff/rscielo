@@ -54,7 +54,7 @@ get_journal_metrics <- function(id_journal){
 
 # @S3 plot
 #' @export
-plot.Scielo_metrics <- function(x, ...){
+plot.scielo_metrics <- function(x, ...){
 
   y.max <- max(c(x$granted_citations, x$received_citations), na.rm = T) + 10
 

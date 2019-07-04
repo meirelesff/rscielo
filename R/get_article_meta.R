@@ -38,16 +38,16 @@
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }
 
-get_article_meta <- function(url){
+get_article_meta <- function(x){
+
+  url <-  id.select(x) %>%
+    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s&lang=en", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
   page <- rvest::html_session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
-  article_id <- strsplit(url, "=|&")[[1]][4]
-
-  sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s&lang=en", article_id) %>%
-    get_xml_article()
+    get_xml_article(url)
 }
 
 

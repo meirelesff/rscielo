@@ -4,10 +4,10 @@
 \alias{get_article_references}
 \title{Scrape bibliographic references from a single article hosted on Scielo}
 \usage{
-get_article_references(url)
+get_article_references(x)
 }
 \arguments{
-\item{url}{a character vector with the link of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or of the article hosted on Scielo to be scrapped.}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:

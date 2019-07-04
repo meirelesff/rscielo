@@ -4,10 +4,10 @@
 \alias{get_article_fnotes}
 \title{Scrape footnotes from a single article hosted on Scielo}
 \usage{
-get_article_fnotes(url)
+get_article_fnotes(x)
 }
 \arguments{
-\item{url}{a character vector with the link of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or id of the article hosted on Scielo to be scrapped.}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:

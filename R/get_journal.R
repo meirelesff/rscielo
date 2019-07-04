@@ -91,7 +91,7 @@ get_internal <- function(editions){
 
 # @S3 summary
 #' @export
-summary.Scielo <- function(object, ...) {
+summary.scielo <- function(object, ...) {
 
 
   journal <- as.character(object$journal[1])

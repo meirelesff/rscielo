@@ -25,7 +25,7 @@ get_xml_article <- function(link) {
     l_pag <- extract_node(page, "//article-meta/lpage") %>% as.numeric()
     n_refs <- extract_node(page, "//ref-list/ref") %>% length()
     doi <- extract_node(page, "//article-meta/article-id[@pub-id-type = 'doi']")
-
+    article_id  <- extract_node(page, "//article-meta/article-id[1]")
 
     res <- data.frame(author = paste(firstname, lastname, collapse = "; ") %>% utf8(),
                       first_author_surname = lastname[1] %>% utf8(),
@@ -46,6 +46,7 @@ get_xml_article <- function(link) {
                       keywords_en = paste(keywords_en, collapse = "; ") %>% utf8(),
                       keywords_es = paste(keywords_es, collapse = "; ") %>% utf8(),
                       doi = doi,
+                      article_id = article_id,
                       n_authors = length(firstname),
                       n_pages = l_pag - f_pag,
                       n_refs = n_refs,
@@ -53,8 +54,6 @@ get_xml_article <- function(link) {
 
     return(res)
 }
-
-
 
 
 
@@ -67,16 +66,26 @@ extract_node <- function(page, path){
 }
 
 
-
 # Converts a character vector encoding to UTF-8
 utf8 <- function(ch) iconv(ch, from = "UTF-8")
 
 
 
 # Tests whether an object class is 'Scielo'
-is.Scielo <- function(x) inherits(x, "Scielo")
+is.scielo <- function(x) inherits(x, "Scielo")
 
+# id select
+id.select <- function(x){
 
+  if(stringr::str_detect(x, "http")){
+    article_id <- strsplit(x, "=|&")[[1]][4]
+
+  }else{
+    article_id <- x
+  }
+
+  return(article_id)
+}
 
 # Avoid the R CMD check note about magrittr's dot
 utils::globalVariables(".")

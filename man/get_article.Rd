@@ -4,10 +4,10 @@
 \alias{get_article}
 \title{Scrape text from a single article hosted on Scielo}
 \usage{
-get_article(url)
+get_article(x)
 }
 \arguments{
-\item{url}{a character vector with the link of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or id of the article hosted on Scielo to be scrapped.}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:

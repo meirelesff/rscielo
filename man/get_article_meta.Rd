@@ -4,7 +4,7 @@
 \alias{get_article_meta}
 \title{Scrape meta-data from a single article hosted on Scielo}
 \usage{
-get_article_meta(url)
+get_article_meta(x)
 }
 \arguments{
 \item{url}{a character vector with the link of the article hosted on Scielo to be scrapped.}

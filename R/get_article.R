@@ -2,7 +2,7 @@
 #'
 #' \code{get_article()} scrapes text from an article hosted on Scielo.
 #'
-#' @param url a character vector with the link of the article hosted on Scielo to be scrapped.
+#' @param x a character vector with the link or id of the article hosted on Scielo to be scrapped.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
@@ -21,7 +21,10 @@
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }
 
-get_article <- function(url){
+get_article <- function(x){
+
+  url <-  id.select(x) %>%
+    sprintf("http://www.scielo.br/scielo.php?script=sci_arttext&pid=%s&lang=en", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
   page <- rvest::html_session(url)
