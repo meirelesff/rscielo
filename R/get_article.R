@@ -4,7 +4,6 @@
 #'
 #' @param x a character vector with the link or id of the article hosted on Scielo to be scrapped.
 #'
-#' @importFrom magrittr "%>%"
 #' @export
 #'
 #' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
@@ -17,26 +16,33 @@
 #'
 #' @examples
 #' \dontrun{
-#' article <- get_article(url = "http://www.scielo.br/scielo.php?
+#' article <- get_article(x = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }
 
 get_article <- function(x){
 
   url <-  id.select(x) %>%
-    sprintf("http://www.scielo.br/scielo.php?script=sci_arttext&pid=%s&lang=en", .)
+    sprintf("http://www.scielo.br/scielo.php?script=sci_arttext&pid=%s", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
-  page <- rvest::html_session(url)
-  if(httr::status_code(page) != 200) stop("Article not found.")
+  page <- html_session(url)
+  if(status_code(page) != 200) stop("Article not found.")
 
-  text <- rvest::html_nodes(page, xpath = "//div[@id='article-body']") %>%
-    rvest::html_text(text)
+  text <- get_article_strategy1(page)
 
-  doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    rvest::html_text(text)
+  if(length(text) == 0) {
+    text <- get_article_strategy2(page)
+  }else{
+    text <- paste(text, collapse = " \n ")
+  }
 
-  data.frame(text, doi, stringsAsFactors = F)
+  id <- id.select(x)
+
+  doi <- html_nodes(page, xpath = '//*[@id="doi"]') %>%
+    html_text()
+
+  data.frame(text, id, doi, stringsAsFactors = F)
 }
 
 

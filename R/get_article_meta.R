@@ -41,7 +41,7 @@
 get_article_meta <- function(x){
 
   url <-  id.select(x) %>%
-    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s&lang=en", .)
+    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
   page <- rvest::html_session(url)

@@ -21,7 +21,8 @@ Imports:
     xml2,
     httr (>= 0.5),
     rvest,
-    stringr
+    stringr,
+    tibble
 LazyData: TRUE
 URL: https://github.com/meirelesff/rscielo
 BugReports: https://github.com/meirelesff/rscielo/issues
