@@ -20,18 +20,18 @@ get_journal_info <- function(id_journal){
   if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
 
   page <- sprintf("http://www.scielo.br/scielo.php?script=sci_serial&pid=%s&nrm=iso", id_journal) %>%
-    rvest::html_session()
+    html_session()
 
-  if(httr::status_code(page) != 200) stop("Journal not found.")
+  if(status_code(page) != 200) stop("Journal not found.")
 
-  publisher <- rvest::html_nodes(page, ".journalTitle") %>%
-    rvest::html_text()
+  publisher <- html_nodes(page, ".journalTitle") %>%
+    html_text()
 
-  issn <- rvest::html_nodes(page, ".issn") %>%
-    rvest::html_text()
+  issn <- html_nodes(page, ".issn") %>%
+    html_text()
 
-  mission <- rvest::html_nodes(page, "p font") %>%
-    rvest::html_text()
+  mission <- html_nodes(page, "p font") %>%
+    html_text()
 
   res <- data.frame(publisher = publisher,
                     issn = issn,

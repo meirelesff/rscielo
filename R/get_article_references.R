@@ -30,7 +30,7 @@ get_article_references <- function(x){
   page <- html_session(url)
   if(status_code(page) != 200) stop("Article not found.")
 
-  references <- rvest::html_nodes(page, xpath = "//p[@class='ref']") %>%
+  references <- html_nodes(page, xpath = "//p[@class='ref']") %>%
     html_text() %>%
     str_replace_all(pattern = "[\n|\t|\r]", replacement = "") %>%
     str_replace_all(pattern = "[\\[][[:blank:]+]Links[[:blank:]+][\\]]", replacement = "")

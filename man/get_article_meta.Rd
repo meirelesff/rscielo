@@ -41,7 +41,7 @@ This functions scrapes several meta-data information, such as author's names, ar
 }
 \examples{
 \dontrun{
-article_meta <- get_article_meta(url = "http://www.scielo.br/scielo.php?
+article_meta <- get_article_meta(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }
 }

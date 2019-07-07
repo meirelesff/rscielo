@@ -3,6 +3,7 @@
 #' @import stringr
 #' @import tibble
 #' @import httr
+#' @import dplyr
 
 # Function to extract meta-data from an article
 get_xml_article <- function(link) {
@@ -135,7 +136,7 @@ get_article_strategy2 <- function(page){
       text <- complete_content[-length(complete_content)]
     }
 
-    text <- paste(articleText, collapse = " \n ")
+    text <- paste(text, collapse = " \n ")
   }
 
   text
@@ -154,11 +155,11 @@ get_article_strategy3 <- function(page){
     html_nodes(xpath = paste(xpathScieloPatterns, collapse="|"))
 
   if(length(font_nodes) < 3){
-    articleText <- page %>%
+    text <- page %>%
       html_nodes(xpath = "//p[@align = 'left']") %>%
       html_text()
 
-    articleText = paste(articleText, collapse = " \n ")
+    text = paste(text, collapse = " \n ")
 
   }else{
     # Finding which font size is the most used
@@ -222,8 +223,8 @@ get_article_strategy3 <- function(page){
         text_data <- left_join(text_data, references, by = "text")
 
         min_line <- text_data %>%
-          left_joinmutate(line = 1:n()) %>%
-          left_joinfilter(!is.na(test)) %>%
+          left_join(mutate(line = 1:n())) %>%
+          left_join(filter(!is.na(.$test))) %>%
           .$line %>%
           min()
 
@@ -245,7 +246,6 @@ get_article_strategy3 <- function(page){
 
   text
 }
-
 
 
 # Avoid the R CMD check note about magrittr's dot
