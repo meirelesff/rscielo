@@ -67,9 +67,9 @@ get_xml_article <- function(link) {
 # Function to extract XML nodes
 extract_node <- function(page, path){
 
-  nodes <- xml_find_all(page, path)
+  nodes <- xml2::xml_find_all(page, path)
   if(length(nodes) == 0) return("")
-  xml_text(nodes)
+  xml2::xml_text(nodes)
 }
 
 
@@ -97,8 +97,8 @@ id.select <- function(x){
 # strategy one from extract date article
 get_article_strategy1 <- function(page){
 
-  text <- html_nodes(page, xpath = "//div[@id='article-body']//p|//div[@id='S01-body']//p") %>%
-    html_text()
+  text <- rvest::html_nodes(page, xpath = "//div[@id='article-body']//p|//div[@id='S01-body']//p") %>%
+    rvest::html_text()
 
   text
 
@@ -107,7 +107,7 @@ get_article_strategy1 <- function(page){
 # strategy two from extract date article
 get_article_strategy2 <- function(page){
 
-  test_strategy2 <- html_nodes(page, xpath = "//hr")
+  test_strategy2 <- rvest::html_nodes(page, xpath = "//hr")
 
   if(length(test_strategy2) == 1){
     text <- get_article_strategy3(page)
@@ -121,13 +121,13 @@ get_article_strategy2 <- function(page){
                              "//div/hr")
 
     nodes <- page %>%
-      html_nodes(xpath = paste(xpathScieloPatterns, collapse ="|"))
+      rvest::html_nodes(xpath = paste(xpathScieloPatterns, collapse ="|"))
 
     tag_names <- purrr::map(nodes, html_tag) %>%
       unlist()
 
     complete_content <- nodes[(last(which(tag_names=="hr"))+1):length(nodes)] %>%
-      html_text()
+      rvest::html_text()
 
     references_location <- grep(x = complete_content, pattern = "[[:blank:]]ref[[:blank:]]")
     if(length(references_location)>0){
@@ -152,12 +152,12 @@ get_article_strategy3 <- function(page){
                            "//div[@class='content']/div//preceding-sibling::comment()")
 
   font_nodes <- page %>%
-    html_nodes(xpath = paste(xpathScieloPatterns, collapse="|"))
+    rvest::html_nodes(xpath = paste(xpathScieloPatterns, collapse="|"))
 
   if(length(font_nodes) < 3){
     text <- page %>%
-      html_nodes(xpath = "//p[@align = 'left']") %>%
-      html_text()
+      rvest::html_nodes(xpath = "//p[@align = 'left']") %>%
+      rvest::html_text()
 
     text = paste(text, collapse = " \n ")
 
@@ -165,7 +165,7 @@ get_article_strategy3 <- function(page){
     # Finding which font size is the most used
     font_sizes <- purrr::map(font_nodes, function(x) {
 
-      size_attribute = html_attr(x, "size")
+      size_attribute = rvest::html_attr(x, "size")
 
       if(length(size_attribute)==0){
         size_attribute = ""
@@ -176,11 +176,11 @@ get_article_strategy3 <- function(page){
       as.numeric()
 
     font_sizes_table = table(font_sizes) %>%
-      as_tibble() %>%
-      arrange(-n)
+      dplyr::as_tibble() %>%
+      dplyr::arrange(-n)
 
     font_1stUsed = font_sizes_table %>%
-      filter(n >= 2) %>%
+      dplyr::filter(n >= 2) %>%
       .$font_sizes %>%
       .[1] %>%
       as.numeric()
@@ -197,25 +197,25 @@ get_article_strategy3 <- function(page){
       ref_start  <- last(which(font_sizes  == font_2ndUsed))
 
       text_data <- font_nodes[text_start : (ref_start - 1)] %>%
-        html_text() %>%
-        tibble(text = .)%>%
-        filter(row_number() > 3 | nchar(text) > 50)
+        rvest::html_text() %>%
+        tibble::tibble(text = .)%>%
+        dplyr::filter(row_number() > 3 | nchar(text) > 50)
     }else{
       text_data <- font_nodes[text_start : length(font_nodes)] %>%
-        html_text() %>%
-        str_replace_all(pattern = "[[:punct:]][[:blank:]]{0,2}Links?[[:blank:]]{0,2}[[:punct:]]",
+        rvest::html_text() %>%
+        stringr::str_replace_all(pattern = "[[:punct:]][[:blank:]]{0,2}Links?[[:blank:]]{0,2}[[:punct:]]",
                         replacement = "") %>%
-        str_trim() %>%
-        tibble(text = .) %>%
-        filter(nchar(text) > 50)
+        stringr::str_trim() %>%
+        tibble::tibble(text = .) %>%
+        dplyr::filter(nchar(text) > 50)
 
       references <- page %>%
-        html_nodes(xpath = "//comment()/ancestor::p|//comment()/ancestor::font") %>%
-        html_text() %>%
-        str_replace_all(pattern = "[[:punct:]][[:blank:]]{0,2}Links?[[:blank:]]{0,2}[[:punct:]]",
+        rvest::html_nodes(xpath = "//comment()/ancestor::p|//comment()/ancestor::font") %>%
+        rvest::html_text() %>%
+        stringr::str_replace_all(pattern = "[[:punct:]][[:blank:]]{0,2}Links?[[:blank:]]{0,2}[[:punct:]]",
                         replacement = "") %>%
-        str_trim() %>%
-        tibble(text = .)
+        stringr::str_trim() %>%
+        tibble::tibble(text = .)
 
       if(nrow(references) > 0 ){
         references$test <- 1
@@ -223,8 +223,8 @@ get_article_strategy3 <- function(page){
         text_data <- left_join(text_data, references, by = "text")
 
         min_line <- text_data %>%
-          left_join(mutate(line = 1:n())) %>%
-          left_join(filter(!is.na(.$test))) %>%
+          dplyr::left_join(dplyr::mutate(line = 1:n())) %>%
+          dplyr::left_join(dplyr::filter(!is.na(.$test))) %>%
           .$line %>%
           min()
 
@@ -236,11 +236,11 @@ get_article_strategy3 <- function(page){
     }
 
     header_data <-
-      html_nodes(page, xpath = "//blockquote//descendant-or-self::b//ancestor-or-self::blockquote//p") %>%
-      html_text() %>%
-      tibble(text = .)
+      rvest::html_nodes(page, xpath = "//blockquote//descendant-or-self::b//ancestor-or-self::blockquote//p") %>%
+      rvest::html_text() %>%
+      tibble::tibble(text = .)
 
-    text <- anti_join(text_data, header_data) %>% .$text %>%
+    text <- dplyr::anti_join(text_data, header_data) %>% .$text %>%
       paste(., collapse = " \n ")
   }
 

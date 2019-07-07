@@ -27,6 +27,7 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
   \item last_page: Article's last page
   \item abstratc: Article's abstract.
   \item keywords: Article's keywords.
+  \item article_id:
   \item doi: DOI.
   \item n_authors: Number of authors.
   \item n_pages: Number of pages.

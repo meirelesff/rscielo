@@ -3,6 +3,7 @@
 #' \code{get_journal()} scrapes meta-data information from all the articles of a journal hosted on Scielo.
 #'
 #' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).
+#' @param last_edition a logical vector, if FALSE scrapes all edition of the journal, if TRUE scrapes last editition of the journal
 #'
 #' @importFrom magrittr "%>%"
 #' @export
@@ -24,6 +25,7 @@
 #'   \item last_page: Article's last page
 #'   \item abstratc: Article's abstract.
 #'   \item keywords: Article's keywords.
+#'   \item article_id:
 #'   \item doi: DOI.
 #'   \item n_authors: Number of authors.
 #'   \item n_pages: Number of pages.
@@ -38,7 +40,7 @@
 #' summary(df)
 #' }
 
-get_journal <- function(id_journal){
+get_journal <- function(id_journal, last_edition = FALSE){
 
 
   if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
@@ -56,34 +58,46 @@ get_journal <- function(id_journal){
 
 
 # Function to extract the XML links for each article in a journal
-get_links <- function(id_journal){
+get_links <- function(id_journal, last_edition = FALSE){
 
 
   page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", id_journal) %>%
-    html_session()
+    rvest::html_session()
 
-  if(status_code(page) != 200) stop("Journal not found.")
+  if(httr::status_code(page) != 200) stop("Journal not found.")
 
-  journal <- html_nodes(page, "center .nomodel") %>%
-    html_text()
+  journal <- rvest::html_nodes(page, "center .nomodel") %>%
+    rvest::html_text()
   cat(sprintf("\n\nScraping articles from: \n\n\n\t%s\n\n\n...", journal))
 
-  page %>%
-    html_nodes("b a") %>%
-    html_attr("href") %>%
+  if(last_edition == TRUE){
+    ed <- page %>%
+      rvest::html_nodes("b a") %>%
+      rvest::html_attr("href") %>%
+      .[1]
+
+  }else{
+    ed <- page %>%
+      rvest::html_nodes("b a") %>%
+      rvest::html_attr("href")
+  }
+
+  ed %>%
     lapply(get_internal) %>%
     unlist() %>%
     substr(56, 78) %>%
     sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
+
+
 }
 
 
 
 # Function to get articles' links
 get_internal <- function(editions){
-  links <- read_html(editions) %>%
-    html_nodes(".content div a") %>%
-    html_attr("href")
+  links <- xml2::read_html(editions) %>%
+    rvest::html_nodes(".content div a") %>%
+    rvest::html_attr("href")
   links[grepl("sci_arttext", links)]
 }
 

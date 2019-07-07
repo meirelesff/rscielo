@@ -24,6 +24,7 @@
 #'   \item last_page: Article's last page
 #'   \item abstratc: Article's abstract.
 #'   \item keywords: Article's keywords.
+#'   \item article_id:
 #'   \item doi: DOI.
 #'   \item n_authors: Number of authors.
 #'   \item n_pages: Number of pages.
@@ -44,8 +45,8 @@ get_article_meta <- function(x){
     sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
-  page <- html_session(url)
-  if(status_code(page) != 200) stop("Article not found.")
+  page <- rvest::html_session(url)
+  if(httr::status_code(page) != 200) stop("Article not found.")
 
     get_xml_article(url)
 }

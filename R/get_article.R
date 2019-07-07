@@ -26,8 +26,8 @@ get_article <- function(x){
     sprintf("http://www.scielo.br/scielo.php?script=sci_arttext&pid=%s", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
-  page <- html_session(url)
-  if(status_code(page) != 200) stop("Article not found.")
+  page <- rvest::html_session(url)
+  if(httr::status_code(page) != 200) stop("Article not found.")
 
   text <- get_article_strategy1(page)
 
@@ -37,12 +37,12 @@ get_article <- function(x){
     text <- paste(text, collapse = " \n ")
   }
 
-  id <- id.select(x)
+  article_id <- id.select(x)
 
-  doi <- html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    html_text()
+  doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
+    rvest::html_text()
 
-  data.frame(text, id, doi, stringsAsFactors = F)
+  data.frame(text, article_id, doi, stringsAsFactors = F)
 }
 
 

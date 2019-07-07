@@ -27,19 +27,19 @@ get_article_references <- function(x){
     sprintf("http://www.scielo.br/scielo.php?script=sci_arttext&pid=%s", .)
 
   if(!is.character(url)) stop("'link' must be a character vector.")
-  page <- html_session(url)
-  if(status_code(page) != 200) stop("Article not found.")
+  page <- rvest::html_session(url)
+  if(httr::status_code(page) != 200) stop("Article not found.")
 
-  references <- html_nodes(page, xpath = "//p[@class='ref']") %>%
-    html_text() %>%
-    str_replace_all(pattern = "[\n|\t|\r]", replacement = "") %>%
-    str_replace_all(pattern = "[\\[][[:blank:]+]Links[[:blank:]+][\\]]", replacement = "")
+  references <- rvest::html_nodes(page, xpath = "//p[@class='ref']") %>%
+    rvest::html_text() %>%
+    stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "") %>%
+    stringr::str_replace_all(pattern = "[\\[][[:blank:]+]Links[[:blank:]+][\\]]", replacement = "")
 
-  id <- id.select(x)
-  doi <- html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    html_text(text)
+  article_id <- id.select(x)
+  doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
+    rvest::html_text(text)
 
-  data.frame(references, id, doi, stringsAsFactors = F)
+  data.frame(references, article_id, doi, stringsAsFactors = F)
 }
 
 

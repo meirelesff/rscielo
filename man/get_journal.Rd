@@ -4,10 +4,12 @@
 \alias{get_journal}
 \title{Scrape meta-data from all the articles of a journal hosted on Scielo}
 \usage{
-get_journal(id_journal)
+get_journal(id_journal, last_edition = FALSE)
 }
 \arguments{
 \item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
+
+\item{last_edition}{a logical vector, if FALSE scrapes all edition of the journal, if TRUE scrapes last editition of the journal}
 }
 \value{
 The function returns an object of class \code{Scielo, data.frame} with the following variables:
@@ -27,6 +29,7 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
   \item last_page: Article's last page
   \item abstratc: Article's abstract.
   \item keywords: Article's keywords.
+  \item article_id:
   \item doi: DOI.
   \item n_authors: Number of authors.
   \item n_pages: Number of pages.
