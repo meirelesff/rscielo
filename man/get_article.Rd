@@ -22,7 +22,7 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 \examples{
 \dontrun{
-article <- get_article(url = "http://www.scielo.br/scielo.php?
+article <- get_article(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }
 }

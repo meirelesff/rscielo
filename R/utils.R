@@ -1,3 +1,9 @@
+#' @import xml2
+#' @import rvest
+#' @import stringr
+#' @import tibble
+#' @import httr
+
 # Function to extract meta-data from an article
 get_xml_article <- function(link) {
 
