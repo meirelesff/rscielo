@@ -17,8 +17,8 @@
 get_id_journal <- function(url){
 
   if(!is.character(url) | length(url) != 1) stop("Invalid 'url'.")
-  page <- rvest::html_session(url)
-  if(httr::status_code(page) != 200) stop("Journal not found.")
+  page <- html_session(url)
+  if(status_code(page) != 200) stop("Journal not found.")
 
   strsplit(url, "=|&")[[1]][4]
 }

@@ -28,17 +28,18 @@ get_article_fnotes <- function(x){
 
 
   if(!is.character(url)) stop("'link' must be a character vector.")
-  page <- rvest::html_session(url)
-  if(httr::status_code(page) != 200) stop("Article not found.")
+  page <- html_session(url)
+  if(status_code(page) != 200) stop("Article not found.")
 
-  foot_notes <- rvest::html_nodes(page, xpath = "//div[@class='fn']") %>%
-   rvest::html_text() %>%
-   stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
+  foot_notes <- html_nodes(page, xpath = "//div[@class='fn']") %>%
+   html_text() %>%
+   str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
 
-  doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    rvest::html_text(text)
+  id <- id.select(x)
+  doi <- html_nodes(page, xpath = '//*[@id="doi"]') %>%
+    html_text(text)
 
-  data.frame(foot_notes, doi, stringsAsFactors = F)
+  data.frame(foot_notes, id, doi, stringsAsFactors = F)
 }
 
 

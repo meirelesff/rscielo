@@ -31,12 +31,12 @@ get_journal_metrics <- function(id_journal){
   if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
 
   page <- paste0("http://statbiblio.scielo.org/stat_biblio/index.php?state=15&lang=en&country=scl&YNG%5B%5D=all&CITED%5B%5D=", id_journal) %>%
-    rvest::html_session()
+    html_session()
 
-  if(httr::status_code(page) != 200) stop("Journal not found.")
+  if(status_code(page) != 200) stop("Journal not found.")
 
-  metrics <- rvest::html_nodes(page, "td table") %>%
-    rvest::html_table(header = T) %>%
+  metrics <- html_nodes(page, "td table") %>%
+    html_table(header = T) %>%
     as.data.frame() %>%
     .[c(-1, -nrow(.)), ] %>%
     apply(2, function(x) as.numeric(gsub(intToUtf8(160), "", x))) %>%

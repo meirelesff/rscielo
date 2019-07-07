@@ -15,16 +15,16 @@
 get_journal_list <- function(){
 
 
-  page <- rvest::html_session("http://www.scielo.br/scielo.php?script=sci_alphabetic&lng=en&nrm=iso")
+  page <- html_session("http://www.scielo.br/scielo.php?script=sci_alphabetic&nrm=iso")
 
-  if(httr::status_code(page) != 200) stop("Unnable to connect.")
+  if(status_code(page) != 200) stop("Unnable to connect.")
 
-  titles <- rvest::html_nodes(page, ".linkado > a") %>%
-    rvest::html_text() %>%
+  titles <- html_nodes(page, ".linkado > a") %>%
+    html_text() %>%
     gsub("\n    |\n   ", "", .)
 
-  urls <- rvest::html_nodes(page, ".linkado > a") %>%
-    rvest::html_attrs() %>%
+  urls <- html_nodes(page, ".linkado > a") %>%
+    html_attrs() %>%
     unlist()
 
   ids <- sapply(urls, function(x) strsplit(x, "=|&")[[1]][4])

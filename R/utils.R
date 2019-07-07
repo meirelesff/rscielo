@@ -83,7 +83,7 @@ is.scielo <- function(x) inherits(x, "Scielo")
 # id select
 id.select <- function(x){
 
-  if(stringr::str_detect(x, "http")){
+  if(str_detect(x, "http")){
     article_id <- strsplit(x, "=|&")[[1]][4]
 
   }else{
@@ -122,7 +122,7 @@ get_article_strategy2 <- function(page){
     nodes <- page %>%
       html_nodes(xpath = paste(xpathScieloPatterns, collapse ="|"))
 
-    tag_names <- purrr::map(nodes, rvest::html_tag) %>%
+    tag_names <- purrr::map(nodes, html_tag) %>%
       unlist()
 
     complete_content <- nodes[(last(which(tag_names=="hr"))+1):length(nodes)] %>%

@@ -59,31 +59,31 @@ get_journal <- function(id_journal){
 get_links <- function(id_journal){
 
 
-  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&lng=en&nrm=iso", id_journal) %>%
-    rvest::html_session()
+  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", id_journal) %>%
+    html_session()
 
-  if(httr::status_code(page) != 200) stop("Journal not found.")
+  if(status_code(page) != 200) stop("Journal not found.")
 
-  journal <- rvest::html_nodes(page, "center .nomodel") %>%
-    rvest::html_text()
+  journal <- html_nodes(page, "center .nomodel") %>%
+    html_text()
   cat(sprintf("\n\nScraping articles from: \n\n\n\t%s\n\n\n...", journal))
 
   page %>%
-    rvest::html_nodes("b a") %>%
-    rvest::html_attr("href") %>%
+    html_nodes("b a") %>%
+    html_attr("href") %>%
     lapply(get_internal) %>%
     unlist() %>%
     substr(56, 78) %>%
-    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s&lang=en", .)
+    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
 }
 
 
 
 # Function to get articles' links
 get_internal <- function(editions){
-  links <- xml2::read_html(editions) %>%
-    rvest::html_nodes(".content div a") %>%
-    rvest::html_attr("href")
+  links <- read_html(editions) %>%
+    html_nodes(".content div a") %>%
+    html_attr("href")
   links[grepl("sci_arttext", links)]
 }
 
