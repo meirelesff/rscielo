@@ -23,7 +23,7 @@ Imports:
     rvest,
     stringr,
     tibble,
-    purr
+    purrr
 LazyData: TRUE
 URL: https://github.com/meirelesff/rscielo
 BugReports: https://github.com/meirelesff/rscielo/issues
