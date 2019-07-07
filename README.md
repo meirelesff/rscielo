@@ -82,7 +82,10 @@ Here is a description of the `rScielo` functions:
 
 -   `get_id_journal()`: Gets a journal's ID from its url.
 -   `get_journal()`: Gets meta-data from all articles published by a journal.
--   `get_article()`: Gets meta-data from a single article.
+-   `get_article()`: Gets text from a single article.
+-   `get_article_fnotes()`: Gets footnote from a single article.
+-   `get_article_references()`: Gets references from a single article.
+-   `get_article_meta()`: Gets meta-data from a single article.
 -   `get_journal_info()`: Gets a journal's description.
 -   `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
 -   `get_journal_metrics()`: Gets publication and citation metrics of a journal.
