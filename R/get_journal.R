@@ -45,7 +45,7 @@ get_journal <- function(id_journal, last_edition = FALSE){
 
   if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
 
-  scielo_data <- get_links(id_journal) %>%
+  scielo_data <- get_links(id_journal, last_edition) %>%
     lapply(get_xml_article) %>%
     do.call("rbind", .)
 
