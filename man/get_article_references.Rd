@@ -7,10 +7,11 @@
 get_article_references(x)
 }
 \arguments{
-\item{x}{a character vector with the link or of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or the id of the article hosted on Scielo
+to be scrapped.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame} with the following variables:
+The function a \code{tibble} with the following variables:
 
 \itemize{
   \item references: an article's bibliographic reference (\code{character}).
@@ -18,11 +19,12 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_article_references()} scrapes bibliographic references information from an article hosted on Scielo.
+\code{get_article_references()} scrapes bibliographic references information
+from an article hosted on Scielo.
 }
 \examples{
 \dontrun{
-get_article_references <- get_article(x = "http://www.scielo.br/scielo.php?
+refs <- get_article_references(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }
 }

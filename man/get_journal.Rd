@@ -2,17 +2,19 @@
 % Please edit documentation in R/get_journal.R
 \name{get_journal}
 \alias{get_journal}
-\title{Scrape meta-data from all the articles of a journal hosted on Scielo}
+\title{Scrape meta-data from articles published by a journal hosted on Scielo}
 \usage{
-get_journal(id_journal, last_edition = FALSE)
+get_journal(id_journal, last_issue = FALSE)
 }
 \arguments{
-\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
+\item{id_journal}{a character vector with the ID of the journal hosted on Scielo
+(the \code{get_ournal_id} function can be used to find the journal ID from its URL).}
 
-\item{last_edition}{a logical vector, if FALSE scrapes all edition of the journal, if TRUE scrapes last editition of the journal}
+\item{last_issue}{a logical vector, if \code{FALSE} scrapes all issues of the journal,
+if \code{TRUE} only scrapes its last issue.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame} with the following variables:
+The function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item author: Author name.
@@ -37,7 +39,8 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_journal()} scrapes meta-data information from all the articles of a journal hosted on Scielo.
+\code{get_journal()} scrapes meta-data information from all the articles of a
+ journal hosted on Scielo.
 }
 \details{
 This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.

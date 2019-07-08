@@ -1,13 +1,15 @@
 #' Scrape meta-data from a single article hosted on Scielo
 #'
-#' \code{get_article_meta()} scrapes meta-data information from an article hosted on Scielo.
+#' \code{get_article_meta()} scrapes meta-data information from an article
+#' hosted on Scielo.
 #'
-#' @param x a character vector with the link or id of the article hosted on Scielo to be scrapped.
+#' @param x a character vector with the link or id of the article hosted on
+#' Scielo to be scrapped.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
 #'
-#' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
+#' @return The function returns a \code{tibble} with the following variables:
 #'
 #' \itemize{
 #'   \item author: Author name.
@@ -31,7 +33,9 @@
 #'   \item n_refs: Number of references.
 #' }
 #'
-#' @details This functions scrapes several meta-data information, such as author's names, article title, year of publication, edition and number of pages.
+#' @details This functions scrapes several meta-data information, such as
+#' author's names, article title, year of publication, journal issue and number
+#' of pages.
 #'
 #' @examples
 #' \dontrun{
@@ -41,14 +45,17 @@
 
 get_article_meta <- function(x){
 
-  url <- id.select(x) %>%
-    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
 
+  # Inputs
+  url <- id_select(x) %>%
+    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
   if(!is.character(url)) stop("'link' must be a character vector.")
+
+  # Test the page
   page <- rvest::html_session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
-    get_xml_article(url)
+  # Return
+  get_xml_article(url)
 }
-
 

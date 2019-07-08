@@ -1,14 +1,17 @@
-#' Scrape meta-data from all the articles of a journal hosted on Scielo
+#' Scrape meta-data from articles published by a journal hosted on Scielo
 #'
-#' \code{get_journal()} scrapes meta-data information from all the articles of a journal hosted on Scielo.
+#' \code{get_journal()} scrapes meta-data information from all the articles of a
+#'  journal hosted on Scielo.
 #'
-#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).
-#' @param last_edition a logical vector, if FALSE scrapes all edition of the journal, if TRUE scrapes last editition of the journal
+#' @param id_journal a character vector with the ID of the journal hosted on Scielo
+#'  (the \code{get_ournal_id} function can be used to find the journal ID from its URL).
+#' @param last_issue a logical vector, if \code{FALSE} scrapes all issues of the journal,
+#'  if \code{TRUE} only scrapes its last issue.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
 #'
-#' @return The function returns an object of class \code{Scielo, data.frame} with the following variables:
+#' @return The function returns a \code{tibble} with the following variables:
 #'
 #' \itemize{
 #'   \item author: Author name.
@@ -40,27 +43,32 @@
 #' summary(df)
 #' }
 
-get_journal <- function(id_journal, last_edition = FALSE){
+get_journal <- function(id_journal, last_issue = FALSE){
 
 
+  # Inputs
   if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
 
-  scielo_data <- get_links(id_journal, last_edition) %>%
-    lapply(get_xml_article) %>%
-    do.call("rbind", .)
 
-  cat("\n\nDone.\n\n")
+  # Get the data
+  scielo_data <- get_links(id_journal, last_issue) %>%
+    purrr::map(get_xml_article) %>%
+    dplyr::bind_rows()
 
-  class(scielo_data) <- c("Scielo", "data.frame")
+  message("\n\nDone.\n\n")
+
+  # Return
+  class(scielo_data) <- c("Scielo", "tibble")
   scielo_data
 }
 
 
 
 # Function to extract the XML links for each article in a journal
-get_links <- function(id_journal, last_edition = FALSE){
+get_links <- function(id_journal, last_issue = FALSE){
 
 
+  # Get the page
   page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", id_journal) %>%
     rvest::html_session()
 
@@ -70,13 +78,15 @@ get_links <- function(id_journal, last_edition = FALSE){
     rvest::html_text()
   cat(sprintf("\n\nScraping articles from: \n\n\n\t%s\n\n\n...", journal))
 
-  if(last_edition == TRUE){
+  if(last_issue){
+
     ed <- page %>%
       rvest::html_nodes("b a") %>%
       rvest::html_attr("href") %>%
       .[1]
 
-  }else{
+  } else {
+
     ed <- page %>%
       rvest::html_nodes("b a") %>%
       rvest::html_attr("href")

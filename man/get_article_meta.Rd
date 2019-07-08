@@ -7,10 +7,11 @@
 get_article_meta(x)
 }
 \arguments{
-\item{x}{a character vector with the link or id of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or id of the article hosted on
+Scielo to be scrapped.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame} with the following variables:
+The function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item author: Author name.
@@ -35,10 +36,13 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_article_meta()} scrapes meta-data information from an article hosted on Scielo.
+\code{get_article_meta()} scrapes meta-data information from an article
+hosted on Scielo.
 }
 \details{
-This functions scrapes several meta-data information, such as author's names, article title, year of publication, edition and number of pages.
+This functions scrapes several meta-data information, such as
+author's names, article title, year of publication, journal issue and number
+of pages.
 }
 \examples{
 \dontrun{

@@ -7,10 +7,11 @@
 get_article(x)
 }
 \arguments{
-\item{x}{a character vector with the link or id of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or id of the article hosted on
+Scielo to be scrapped.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame} with the following variables:
+The function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item text: article's content (\code{character}).

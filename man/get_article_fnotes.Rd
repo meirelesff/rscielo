@@ -7,10 +7,12 @@
 get_article_fnotes(x)
 }
 \arguments{
-\item{x}{a character vector with the link or id of the article hosted on Scielo to be scrapped.}
+\item{x}{a character vector with the link or id of the article hosted on
+Scielo to be scrapped.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame} with the following variables:
+The function returns an object of class \code{Scielo, data.frame}
+with the following variables:
 
 \itemize{
   \item footnote: article's footnotes (\code{character}).
@@ -18,11 +20,12 @@ The function returns an object of class \code{Scielo, data.frame} with the follo
 }
 }
 \description{
-\code{get_article_fnotes()} scrapes footnote information from an article hosted on Scielo.
+\code{get_article_fnotes()} scrapes all the footnotes iin an article hosted
+on Scielo.
 }
 \examples{
 \dontrun{
-get_article_fnotes <- get_article_fnotes(url = "http://www.scielo.br/scielo.php?
+get_article_fnotes <- get_article_fnotes(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }
 }

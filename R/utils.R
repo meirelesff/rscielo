@@ -82,36 +82,42 @@ utf8 <- function(ch) iconv(ch, from = "UTF-8")
 is.scielo <- function(x) inherits(x, "Scielo")
 
 # id select
-id.select <- function(x){
+id_select <- function(x){
 
-  if(str_detect(x, "http")){
+  if(str_detect(x, "http")) {
+
     article_id <- strsplit(x, "=|&")[[1]][4]
 
-  }else{
+  } else {
+
     article_id <- x
   }
 
   return(article_id)
 }
 
-# strategy one from extract date article
+
+
+# First strategy to extract article text
 get_article_strategy1 <- function(page){
 
-  text <- rvest::html_nodes(page, xpath = "//div[@id='article-body']//p|//div[@id='S01-body']//p") %>%
+  rvest::html_nodes(page, xpath = "//div[@id='article-body']//p|//div[@id='S01-body']//p") %>%
     rvest::html_text()
-
-  text
-
 }
 
-# strategy two from extract date article
+
+
+# Second strategy to extract article text
 get_article_strategy2 <- function(page){
+
 
   test_strategy2 <- rvest::html_nodes(page, xpath = "//hr")
 
-  if(length(test_strategy2) == 1){
+  if(length(test_strategy2) == 1) {
+
     text <- get_article_strategy3(page)
-  }else{
+
+  } else {
 
     xpathScieloPatterns <- c("//div[@class='content']/div/font/p",
                              "//div[@class='content']/div/font/p/preceding-sibling::comment()",
@@ -130,9 +136,13 @@ get_article_strategy2 <- function(page){
       rvest::html_text()
 
     references_location <- grep(x = complete_content, pattern = "[[:blank:]]ref[[:blank:]]")
-    if(length(references_location)>0){
+
+    if(length(references_location)>0) {
+
       text <- complete_content[1:(first(references_location) - 2)]
-    }else{
+
+    } else {
+
       text <- complete_content[-length(complete_content)]
     }
 
@@ -142,8 +152,12 @@ get_article_strategy2 <- function(page){
   text
 }
 
-# strategy three from extract date article
+
+
+# Third strategy to extract article text
 get_article_strategy3 <- function(page){
+
+
   xpathScieloPatterns <- c("//div[@class='content']/div/font/p/..",
                            "//div[@class='content']/div/font/p/../preceding-sibling::comment()",
                            "//div[@class='content']/div/font/p/../comment()",
@@ -154,14 +168,16 @@ get_article_strategy3 <- function(page){
   font_nodes <- page %>%
     rvest::html_nodes(xpath = paste(xpathScieloPatterns, collapse="|"))
 
-  if(length(font_nodes) < 3){
+  if(length(font_nodes) < 3) {
+
     text <- page %>%
       rvest::html_nodes(xpath = "//p[@align = 'left']") %>%
       rvest::html_text()
 
     text = paste(text, collapse = " \n ")
 
-  }else{
+  } else {
+
     # Finding which font size is the most used
     font_sizes <- purrr::map(font_nodes, function(x) {
 
@@ -194,13 +210,16 @@ get_article_strategy3 <- function(page){
     text_start <- first(which(font_sizes == font_1stUsed))
 
     if(!is.na(font_2ndUsed)){
+
       ref_start  <- last(which(font_sizes  == font_2ndUsed))
 
       text_data <- font_nodes[text_start : (ref_start - 1)] %>%
         rvest::html_text() %>%
         tibble::tibble(text = .)%>%
         dplyr::filter(row_number() > 3 | nchar(text) > 50)
-    }else{
+
+    } else {
+
       text_data <- font_nodes[text_start : length(font_nodes)] %>%
         rvest::html_text() %>%
         stringr::str_replace_all(pattern = "[[:punct:]][[:blank:]]{0,2}Links?[[:blank:]]{0,2}[[:punct:]]",
@@ -217,7 +236,8 @@ get_article_strategy3 <- function(page){
         stringr::str_trim() %>%
         tibble::tibble(text = .)
 
-      if(nrow(references) > 0 ){
+      if(nrow(references) > 0 ) {
+
         references$test <- 1
 
         text_data <- left_join(text_data, references, by = "text")
@@ -246,6 +266,7 @@ get_article_strategy3 <- function(page){
 
   text
 }
+
 
 
 # Avoid the R CMD check note about magrittr's dot
