@@ -22,5 +22,5 @@ get_journal_id <- function(url){
   if(httr::status_code(page) != 200) stop("Journal not found.")
 
   # Return
-  strsplit(url, "=|&")[[1]][4]
+  stringr::str_split(url, "=|&", simplify = T)[, 4]
 }

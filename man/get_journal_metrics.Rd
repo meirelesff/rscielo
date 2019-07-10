@@ -4,13 +4,15 @@
 \alias{get_journal_metrics}
 \title{Scrape publication and citation metrics of a journal hosted on Scielo}
 \usage{
-get_journal_metrics(id_journal)
+get_journal_metrics(journal_id)
 }
 \arguments{
-\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
+\item{journal_id}{a character vector with the ID of the journal hosted on
+Scielo (the \code{get_journal_id} function can be used to find a journal's
+ID from its URL).}
 }
 \value{
-The function returns an object of class \code{data.frame} with the following variables:
+The function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item year: Year.
@@ -18,14 +20,16 @@ The function returns an object of class \code{data.frame} with the following var
   \item n_articles: Number of articles in that year.
   \item granted_citations: Granted citations by the journal in that year.
   \item received_citations: Received citations by the journal in that year.
-  \item avg_art_per_issues: Average number of articles published by the journal in that year.
+  \item avg_art_per_issues: Average number of articles published by the
+  journal in that year.
 }
 }
 \description{
-\code{get_journal_metrics()} scrapes publication and citation information of a jornal hosted on Scielo.
+\code{get_journal_metrics()} scrapes publication and citation information
+of a jornal hosted on Scielo.
 }
 \examples{
 \dontrun{
-df <- get_journal_metrics(id_journal = "1981-3821")
+df <- get_journal_metrics(journal_id = "1981-3821")
 }
 }

@@ -1,29 +1,34 @@
 #' Scrape the description of a journal hosted on Scielo
 #'
-#' \code{get_journal_info()} scrapes the description (publisher, issn, and mission) information of a journal hosted on Scielo.
+#' \code{get_journal_info()} scrapes the description (publisher, issn, and mission)
+#'  information of a journal hosted on Scielo.
 #'
-#' @param id_journal a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).
+#' @param journal_id a character vector with the ID of the journal hosted on
+#' Scielo (the \code{get_journal_id} function can be used to find a journal's ID
+#' from its URL).
 #'
 #' @importFrom magrittr "%>%"
 #' @export
 #'
-#' @return The function returns a \code{data.frame} with the journal's description.
+#' @return The function returns a \code{tibble} with the journal's description.
 #'
 #' @examples
 #' \dontrun{
-#' journal_info <- get_journal_info(id_journal = "1981-3821")
+#' journal_info <- get_journal_info(journal_id = "1981-3821")
 #' }
 
-get_journal_info <- function(id_journal){
+get_journal_info <- function(journal_id){
 
 
-  if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
+  # Inputs
+  if(!is.character(journal_id) | nchar(journal_id) != 9) stop("Invalid 'journal_id'.")
 
-  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_serial&pid=%s&nrm=iso", id_journal) %>%
+  # Read page
+  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_serial&pid=%s&nrm=iso", journal_id) %>%
     rvest::html_session()
-
   if(httr::status_code(page) != 200) stop("Journal not found.")
 
+  # Get the data
   publisher <- rvest::html_nodes(page, ".journalTitle") %>%
     rvest::html_text()
 
@@ -33,11 +38,11 @@ get_journal_info <- function(id_journal){
   mission <- rvest::html_nodes(page, "p font") %>%
     rvest::html_text()
 
-  res <- data.frame(publisher = publisher,
-                    issn = issn,
-                    mission = mission)
+  # Return
+  tibble::tibble(publisher = publisher,
+                 issn = issn,
+                 mission = mission)
 
-  res
 }
 
 

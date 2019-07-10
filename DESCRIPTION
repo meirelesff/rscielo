@@ -1,23 +1,24 @@
 Package: rscielo
 Type: Package
 Title: A Scraper for Scientific Journals Hosted on Scielo
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
-    person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre")),
-    person("Denisson", "Silva", , "silvadenisson@ufmg.br", c("aut")),
-    person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("ctb"))
+    person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre"), c(ORCID = "0000-0002-7027-2058")),
+    person("Denisson", "Silva", , "silvadenisson@ufmg.br", c("aut"), c(ORCID = "0000-0003-2771-8146")),
+    person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("ctb"), c(ORCID = "0000-0002-7027-2058"))
     )
-Description: Scrapes meta-data from
-    scientific articles hosted on the Scientific Electronic Library Online Platform (Scielo).
-    The meta-data information includes author's names, articles' titles, year of
-    the publication, among others. The package also provides additional functions to
-    summarize the scraped data.
+Description: Scrapes data from scientific articles hosted on the Scientific 
+    Electronic Library Online Platform (Scielo). The data information includes 
+    author's names, articles' titles and texts and bibliographic references, 
+    year of the publication, among others. The package also provides additional 
+    functions to easily summarize the scraped data.
 License: GPL (>= 2)
 Depends:
     R (>= 3.0.1)
 Imports:
     graphics,
     magrittr,
+    stats,
     xml2,
     httr (>= 0.5),
     rvest,

@@ -3,7 +3,7 @@
 #' \code{get_journal()} scrapes meta-data information from all the articles of a
 #'  journal hosted on Scielo.
 #'
-#' @param id_journal a character vector with the ID of the journal hosted on Scielo
+#' @param journal_id a character vector with the ID of the journal hosted on Scielo
 #'  (the \code{get_ournal_id} function can be used to find the journal ID from its URL).
 #' @param last_issue a logical vector, if \code{FALSE} scrapes all issues of the journal,
 #'  if \code{TRUE} only scrapes its last issue.
@@ -39,19 +39,19 @@
 #'
 #' @examples
 #' \dontrun{
-#' df <- get_journal(id_journal = "1981-3821")
+#' df <- get_journal(journal_id = "1981-3821")
 #' summary(df)
 #' }
 
-get_journal <- function(id_journal, last_issue = FALSE){
+get_journal <- function(journal_id, last_issue = FALSE){
 
 
   # Inputs
-  if(!is.character(id_journal) | nchar(id_journal) != 9) stop("Invalid 'id_journal'.")
+  if(!is.character(journal_id) | nchar(journal_id) != 9) stop("Invalid 'id_journal'.")
 
 
   # Get the data
-  scielo_data <- get_links(id_journal, last_issue) %>%
+  scielo_data <- get_links(journal_id, last_issue) %>%
     purrr::map(get_xml_article) %>%
     dplyr::bind_rows()
 
@@ -65,11 +65,11 @@ get_journal <- function(id_journal, last_issue = FALSE){
 
 
 # Function to extract the XML links for each article in a journal
-get_links <- function(id_journal, last_issue = FALSE){
+get_links <- function(journal_id, last_issue = FALSE){
 
 
   # Get the page
-  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", id_journal) %>%
+  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", journal_id) %>%
     rvest::html_session()
 
   if(httr::status_code(page) != 200) stop("Journal not found.")

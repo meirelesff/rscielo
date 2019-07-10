@@ -4,19 +4,22 @@
 \alias{get_journal_info}
 \title{Scrape the description of a journal hosted on Scielo}
 \usage{
-get_journal_info(id_journal)
+get_journal_info(journal_id)
 }
 \arguments{
-\item{id_journal}{a character vector with the ID of the journal hosted on Scielo (the \code{get_id_journal} function can be used to find the journal ID from its URL).}
+\item{journal_id}{a character vector with the ID of the journal hosted on
+Scielo (the \code{get_journal_id} function can be used to find a journal's ID
+from its URL).}
 }
 \value{
-The function returns a \code{data.frame} with the journal's description.
+The function returns a \code{tibble} with the journal's description.
 }
 \description{
-\code{get_journal_info()} scrapes the description (publisher, issn, and mission) information of a journal hosted on Scielo.
+\code{get_journal_info()} scrapes the description (publisher, issn, and mission)
+ information of a journal hosted on Scielo.
 }
 \examples{
 \dontrun{
-journal_info <- get_journal_info(id_journal = "1981-3821")
+journal_info <- get_journal_info(journal_id = "1981-3821")
 }
 }
