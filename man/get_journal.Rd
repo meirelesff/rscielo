@@ -4,14 +4,14 @@
 \alias{get_journal}
 \title{Scrape meta-data from articles published by a journal hosted on Scielo}
 \usage{
-get_journal(journal_id, last_issue = FALSE)
+get_journal(journal_id, last_issue = TRUE)
 }
 \arguments{
 \item{journal_id}{a character vector with the ID of the journal hosted on Scielo
 (the \code{get_ournal_id} function can be used to find the journal ID from its URL).}
 
 \item{last_issue}{a logical vector, if \code{FALSE} scrapes all issues of the journal,
-if \code{TRUE} only scrapes its last issue.}
+if \code{TRUE} (default) only scrapes its last issue.}
 }
 \value{
 The function returns a \code{tibble} with the following variables:
@@ -43,7 +43,9 @@ The function returns a \code{tibble} with the following variables:
  journal hosted on Scielo.
 }
 \details{
-This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.
+This functions scrapes several meta-data information, such as
+author's names, articles' titles, year of publication, edition and number of pages,
+ that can be summarized with specific \code{summary} method.
 }
 \examples{
 \dontrun{

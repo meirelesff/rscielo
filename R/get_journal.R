@@ -6,7 +6,7 @@
 #' @param journal_id a character vector with the ID of the journal hosted on Scielo
 #'  (the \code{get_ournal_id} function can be used to find the journal ID from its URL).
 #' @param last_issue a logical vector, if \code{FALSE} scrapes all issues of the journal,
-#'  if \code{TRUE} only scrapes its last issue.
+#'  if \code{TRUE} (default) only scrapes its last issue.
 #'
 #' @importFrom magrittr "%>%"
 #' @export
@@ -35,7 +35,9 @@
 #'   \item n_refs: Number of references.
 #' }
 #'
-#' @details This functions scrapes several meta-data information, such as author's names, articles' titles, year of publication, edition and number of pages, that can be summarized with specific \code{summary} method.
+#' @details This functions scrapes several meta-data information, such as
+#' author's names, articles' titles, year of publication, edition and number of pages,
+#'  that can be summarized with specific \code{summary} method.
 #'
 #' @examples
 #' \dontrun{
@@ -43,22 +45,21 @@
 #' summary(df)
 #' }
 
-get_journal <- function(journal_id, last_issue = FALSE){
+get_journal <- function(journal_id, last_issue = TRUE){
 
 
   # Inputs
   if(!is.character(journal_id) | nchar(journal_id) != 9) stop("Invalid 'id_journal'.")
-
 
   # Get the data
   scielo_data <- get_links(journal_id, last_issue) %>%
     purrr::map(get_xml_article) %>%
     dplyr::bind_rows()
 
-  message("\n\nDone.\n\n")
+  message("\nDone.\n\n")
 
   # Return
-  class(scielo_data) <- c("Scielo", "tibble")
+  class(scielo_data) <- c("Scielo", class(scielo_data))
   scielo_data
 }
 
@@ -71,41 +72,40 @@ get_links <- function(journal_id, last_issue = FALSE){
   # Get the page
   page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", journal_id) %>%
     rvest::html_session()
-
   if(httr::status_code(page) != 200) stop("Journal not found.")
 
   journal <- rvest::html_nodes(page, "center .nomodel") %>%
     rvest::html_text()
-  cat(sprintf("\n\nScraping articles from: \n\n\n\t%s\n\n\n...", journal))
+  message(sprintf("\n\nScraping data from: %s\n\nMay take a while...", journal))
 
-  if(last_issue){
+  # Test cases
+  if(last_issue){ # Last issue
 
     ed <- page %>%
       rvest::html_nodes("b a") %>%
       rvest::html_attr("href") %>%
-      .[1]
+      purrr::pluck(1)
 
-  } else {
+  } else { # All issues
 
     ed <- page %>%
       rvest::html_nodes("b a") %>%
       rvest::html_attr("href")
   }
 
+  # Return
   ed %>%
-    lapply(get_internal) %>%
-    unlist() %>%
-    substr(56, 78) %>%
+    purrr::map(get_internal) %>%
+    purrr::flatten_chr() %>%
+    stringr::str_sub(56, 78) %>%
     sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
-
-
 }
 
 
 
-# Function to get articles' links
-get_internal <- function(editions){
-  links <- xml2::read_html(editions) %>%
+# Function to get articles' links in each journal's issue
+get_internal <- function(issues){
+  links <- xml2::read_html(issues) %>%
     rvest::html_nodes(".content div a") %>%
     rvest::html_attr("href")
   links[grepl("sci_arttext", links)]
@@ -115,20 +115,23 @@ get_internal <- function(editions){
 
 # @S3 summary
 #' @export
-summary.scielo <- function(object, ...) {
+summary.Scielo <- function(object, ...) {
 
 
   journal <- as.character(object$journal[1])
   total <- nrow(object)
-  total_articles <- nrow(object[nchar(as.character(object$abstract)) > 1,])
-  years <- range(as.numeric(as.character(object$year)), na.rm = T)
-  mean_authors <- round(mean(object$n_authors[nchar(as.character(object$abstract)) > 1], na.rm = T), 2)
-  mean_size <- round(mean(object$n_pages[nchar(as.character(object$abstract)) > 1], na.rm = T), 2)
+  total_articles <- sum(nchar(object$abstract_en) > 1 | nchar(object$abstract_pt) > 0)
+  mean_authors <- round(mean(object$n_authors[nchar(as.character(object$abstract_en)) > 1 |
+                                                nchar(as.character(object$abstract_pt)) > 1], na.rm = T), 2)
+  mean_authors <- ifelse(is.nan(mean_authors), "Not available", mean_authors)
+  mean_size <- round(mean(object$n_pages[nchar(as.character(object$abstract_en)) > 1 |
+                                           nchar(as.character(object$abstract_pt)) > 1], na.rm = T), 2)
+  mean_size <- ifelse(is.nan(mean_size), "Not available", mean_size)
+
 
   out <- list(journal = journal,
               total = total,
               total_articles = total_articles,
-              years = years,
               mean_authors = mean_authors,
               mean_size = mean_size
   )
@@ -144,7 +147,7 @@ summary.scielo <- function(object, ...) {
 print.summary.Scielo <- function(x, ...){
 
 
-  cat(sprintf("\n### JOURNAL SUMMARY: %s (%s - %s)\n\n\n", x$journal, x$years[1], x$years[2]))
+  cat(sprintf("\n### JOURNAL: %s\n\n\n", x$journal))
 
   cat("\tTotal number of articles: ", x$total,
       "\n\tTotal number of articles (reviews excluded): ", x$total_articles)

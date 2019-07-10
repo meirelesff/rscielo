@@ -9,8 +9,7 @@
 #' @importFrom magrittr "%>%"
 #' @export
 #'
-#' @return The function returns an object of class \code{Scielo, data.frame}
-#' with the following variables:
+#' @return The function returns a \code{tibble} with the following variables:
 #'
 #' \itemize{
 #'   \item footnote: article's footnotes (\code{character}).

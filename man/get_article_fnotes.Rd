@@ -11,8 +11,7 @@ get_article_fnotes(x)
 Scielo to be scrapped.}
 }
 \value{
-The function returns an object of class \code{Scielo, data.frame}
-with the following variables:
+The function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item footnote: article's footnotes (\code{character}).

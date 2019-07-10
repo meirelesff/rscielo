@@ -110,10 +110,12 @@ get_article_strategy1 <- function(page){
 get_article_strategy2 <- function(page){
 
 
+  # Test cases
   test_strategy2 <- rvest::html_nodes(page, xpath = "//hr")
 
   if(length(test_strategy2) == 1) {
 
+    # Third strategy
     text <- get_article_strategy3(page)
 
   } else {
@@ -125,6 +127,7 @@ get_article_strategy2 <- function(page){
                              "//div[@class='content']/div/p/preceding-sibling::comment()",
                              "//div/hr")
 
+    # Get data
     nodes <- page %>%
       rvest::html_nodes(xpath = paste(xpathScieloPatterns, collapse ="|"))
 

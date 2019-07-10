@@ -33,24 +33,22 @@ get_article <- function(x){
   page <- rvest::html_session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
-
   # Get the data
   text <- get_article_strategy1(page)
 
   if(length(text) == 0) {
 
-    # Second try
+    # Second and third shots
     text <- get_article_strategy2(page)
 
   } else {
 
-    # Last shot
-    text <-  get_article_strategy3(page)
+    # Last try
+    text <-  paste(page, collapse = "\n")
   }
 
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text()
-
 
   # Return
   tibble::tibble(text = text,
