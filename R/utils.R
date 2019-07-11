@@ -1,17 +1,9 @@
-#' @import xml2
-#' @import rvest
-#' @import stringr
-#' @import tibble
-#' @import httr
-#' @import dplyr
-
-
 # Function to extract meta-data from an article
 get_xml_article <- function(link) {
 
 
   # Read tge page
-  page <- try(read_xml(link), silent = T)
+  page <- try(xml2::read_xml(link), silent = T)
   if(class(page)[1] == "try-error") return(rep(NA, 13))
 
   lastname <- extract_node(page, "//article-meta/contrib-group/contrib/name/surname")
@@ -131,17 +123,17 @@ get_article_strategy2 <- function(page){
     nodes <- page %>%
       rvest::html_nodes(xpath = paste(xpathScieloPatterns, collapse ="|"))
 
-    tag_names <- purrr::map(nodes, html_tag) %>%
+    tag_names <- purrr::map(nodes, rvest::html_tag) %>%
       unlist()
 
-    complete_content <- nodes[(last(which(tag_names=="hr"))+1):length(nodes)] %>%
+    complete_content <- nodes[(dplyr::last(which(tag_names=="hr"))+1):length(nodes)] %>%
       rvest::html_text()
 
     references_location <- grep(x = complete_content, pattern = "[[:blank:]]ref[[:blank:]]")
 
     if(length(references_location)>0) {
 
-      text <- complete_content[1:(first(references_location) - 2)]
+      text <- complete_content[1:(dplyr::first(references_location) - 2)]
 
     } else {
 
@@ -174,51 +166,55 @@ get_article_strategy3 <- function(page){
 
     text <- page %>%
       rvest::html_nodes(xpath = "//p[@align = 'left']") %>%
-      rvest::html_text()
-
-    text = paste(text, collapse = " \n ")
+      rvest::html_text() %>%
+      paste(collapse = " \n ")
 
   } else {
 
     # Finding which font size is the most used
-    font_sizes <- purrr::map(font_nodes, function(x) {
+    font_sizes <- purrr::map(font_nodes,
 
-      size_attribute = rvest::html_attr(x, "size")
+                             function(x) {
 
-      if(length(size_attribute)==0){
-        size_attribute = ""
-      }
+                               size_attribute <- rvest::html_attr(x, "size")
 
-      size_attribute}) %>%
+                               if(length(size_attribute) == 0){
+
+                                 size_attribute <- ""
+                                 }
+
+                               size_attribute
+                               }
+                             ) %>%
       unlist() %>%
       as.numeric()
 
-    font_sizes_table = table(font_sizes) %>%
+    font_sizes_table <- table(font_sizes) %>%
       dplyr::as_tibble() %>%
-      dplyr::arrange(-n)
+      dplyr::arrange(-dplyr::n())
 
-    font_1stUsed = font_sizes_table %>%
-      dplyr::filter(n >= 2) %>%
+    font_1stUsed <- font_sizes_table %>%
+      dplyr::filter(dplyr::n() >= 2) %>%
       .$font_sizes %>%
-      .[1] %>%
+      purrr::pluck(1) %>%
       as.numeric()
 
-    font_2ndUsed = font_sizes_table %>%
-      filter(n >= 2) %>%
+    font_2ndUsed <- font_sizes_table %>%
+      dplyr::filter(dplyr::n() >= 2) %>%
       .$font_sizes %>%
-      .[2] %>%
+      purrr::pluck(2) %>%
       as.numeric()
 
-    text_start <- first(which(font_sizes == font_1stUsed))
+    text_start <- dplyr::first(which(font_sizes == font_1stUsed))
 
     if(!is.na(font_2ndUsed)){
 
-      ref_start  <- last(which(font_sizes  == font_2ndUsed))
+      ref_start  <- dplyr::last(which(font_sizes  == font_2ndUsed))
 
       text_data <- font_nodes[text_start : (ref_start - 1)] %>%
         rvest::html_text() %>%
         tibble::tibble(text = .)%>%
-        dplyr::filter(row_number() > 3 | nchar(text) > 50)
+        dplyr::filter(dplyr::row_number() > 3 | nchar(text) > 50)
 
     } else {
 
@@ -242,19 +238,18 @@ get_article_strategy3 <- function(page){
 
         references$test <- 1
 
-        text_data <- left_join(text_data, references, by = "text")
+        text_data <- dplyr::left_join(text_data, references, by = "text")
 
         min_line <- text_data %>%
-          dplyr::left_join(dplyr::mutate(line = 1:n())) %>%
+          dplyr::left_join(dplyr::mutate(line = 1:dplyr::n())) %>%
           dplyr::left_join(dplyr::filter(!is.na(.$test))) %>%
           .$line %>%
           min()
 
-        text_data <- text_data[1:(min_line-1), "text"]
+        text_data <- text_data[1:(min_line - 1), "text"]
       }
 
       font_nodes
-
     }
 
     header_data <-
@@ -262,8 +257,9 @@ get_article_strategy3 <- function(page){
       rvest::html_text() %>%
       tibble::tibble(text = .)
 
-    text <- dplyr::anti_join(text_data, header_data) %>% .$text %>%
-      paste(., collapse = " \n ")
+    text <- dplyr::anti_join(text_data, header_data) %>%
+      .$text %>%
+      paste(collapse = " \n ")
   }
 
   text

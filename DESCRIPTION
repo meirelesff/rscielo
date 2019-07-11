@@ -12,9 +12,9 @@ Description: Scrapes data from scientific articles hosted on the Scientific
     author's names, articles' titles and texts and bibliographic references, 
     year of the publication, among others. The package also provides additional 
     functions to easily summarize the scraped data.
-License: GPL (>= 2)
+License: GPL-3
 Depends:
-    R (>= 3.0.1)
+    R (>= 3.1)
 Imports:
     graphics,
     magrittr,
