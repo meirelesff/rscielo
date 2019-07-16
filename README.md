@@ -16,10 +16,10 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 `rscielo` provides functions to easily scrape bibliometric information
 from scientific journals and articles hosted on the [Scientific
 Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/).
-The retrieved data includes journal’s details and citation counts;
-article’s contents, footnotes, bibliographic references; and many other
-common information used in bibliometric studies. The package also offers
-functions to quickly summarize the scrapped data.
+The retrieved data includes a journal’s details and citation counts;
+article’s contents, footnotes, bibliographic references; and several
+other common information used in bibliometric studies. The package also
+offers functions to quickly summarize the scrapped data.
 
 ### Installing
 
@@ -41,20 +41,19 @@ remotes::install_github("meirelesff/rscielo")
 ### How does it work?
 
 At its core, `rscielo` is a scraper that offers a transparent and
-reprodutible approach to gather data from the [Scientific Electronic
+reproducible approach to gather data from the [Scientific Electronic
 Library Online Platform (Scielo.br)](http://www.scielo.br/), one of the
 largest open repositories for scientific publications in the world. In
-particular, the package provides several functions to automatically
-extract and parse different types of information from (1) scientific
-journals (pointed by `_journal` or `_journal_` in their names) and (2)
-articles (with functions that contains `_article` or `_article_` in
-their names).
+particular, the package provides functions to automatically extract and
+parse different types of information from (1) scientific journals
+(pointed by `_journal` or `_journal_` in their names) and (2) articles
+(with functions that contains `_article` or `_article_` in their names).
 
 ### Data from journals
 
 #### Getting a journal’s ID
 
-To get data from an entire journal, such as citation counts and
+To get data from a particular journal, such as citation counts and
 [ISSN](https://en.wikipedia.org/wiki/International_Standard_Serial_Number),
 the `rscielo` relies on an ID (or pid) that uniquely identifies each
 journal within the [Scielo](http://www.scielo.br/) repository. As an
@@ -65,9 +64,9 @@ Review](http://www.scielo.br/bpsr/) homepage on
     http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&lng=en&nrm=iso
 
 The journal ID can be found between `&pid=` and `&lng` (i.e.,
-`1981-3821`). Most `rscielo`’s functions that retrive data from journals
-rely on this information to work. To automatically extract an ID from
-the URL of a journal, one may use the `get_journal_id()`
+`1981-3821`). Most of `rscielo`’s functions that retrieve data from
+journals rely on this information to work. To automatically extract an
+ID from the URL of a journal, one may use the `get_journal_id()`
 function:
 
 ``` r
@@ -85,11 +84,11 @@ df <- get_journal("1981-3821")
 ```
 
 This code returns a `tibble` in which the observations correspond to the
-articles that appeared in the journal lastest issue. Among the returned
-variables are authors’ names, institutional affiliations, and home
-countries; articles’s abstracts, keywords, and number of pages (check
-the `get_journal` documentation with `help(get_journal)` for a full
-description of the retrieved data).
+articles that appeared in the selected journal’s lastest issue. Among
+the returned variables are authors’ names, institutional affiliations,
+and home countries; articles’ abstracts, keywords, and the number of
+pages (check the `get_journal` documentation executing
+`help(get_journal)` for a full description of the retrieved data).
 
 For a quick glimpse at the scrapped data, one may use the `summary`
 method:
@@ -149,8 +148,8 @@ journals <- get_journal_list()
 #### Getting an articles’ ID
 
 Scientific articles stored on [Scielo](http://www.scielo.br/) are also
-identified by an unique ID – a partial combination between their Digital
-Object Identifiers
+identified by a unique ID, which is formed by a combination between
+their Digital Object Identifiers
 ([DOI](https://en.wikipedia.org/wiki/Digital_object_identifier)) plus
 other characters. These IDs can se seen in each article’s URL (after
 `&pid=` until `&lng=`):
@@ -160,8 +159,8 @@ other characters. These IDs can se seen in each article’s URL (after
 url_article <- "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en"
 ```
 
-By design, `rscilo` handles full articles’ URLs as inputs, but users may
-obtain the IDs by using the `get_article_id` function:
+By design, `rscielo` handles full articles’ URLs as inputs, but users
+may obtain the IDs by using the `get_article_id` function:
 
 ``` r
 get_article_id(url_article)
@@ -215,7 +214,7 @@ article_references <- get_article_references(url)
 
 The function outputs a `tibble` in which every bibliographic item
 corresponds to an observation. `get_article_footnotes()` returns a
-similar object, but with foonotes in the rows:
+similar object, but with footnotes in the rows:
 
 ``` r
 article_foots <- get_article_footnotes(url)
@@ -223,7 +222,7 @@ article_foots <- get_article_footnotes(url)
 
 ### A list of functions
 
-For convinience, here is a description of the `rScielo` functions.
+For convenience, here is a description of the `rScielo` functions.
 
 **Function to extract data from journals:**
 
@@ -262,15 +261,15 @@ citation("rscielo")
 #> 
 #> To cite package 'rscielo' in publications use:
 #> 
-#>   Fernando Meireles and Denisson Silva (2019). rscielo: A Scraper
-#>   for Scientific Journals Hosted on Scielo. R package version
-#>   1.0.0. https://github.com/meirelesff/rscielo
+#>   Fernando Meireles, Denisson Silva and Rogerio Barbosa (2019).
+#>   rscielo: A Scraper for Scientific Journals Hosted on Scielo. R
+#>   package version 1.0.0. https://github.com/meirelesff/rscielo
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {rscielo: A Scraper for Scientific Journals Hosted on Scielo},
-#>     author = {Fernando Meireles and Denisson Silva},
+#>     author = {Fernando Meireles and Denisson Silva and Rogerio Barbosa},
 #>     year = {2019},
 #>     note = {R package version 1.0.0},
 #>     url = {https://github.com/meirelesff/rscielo},
@@ -279,7 +278,8 @@ citation("rscielo")
 
 ### Contributions
 
-`rscielo` in an open-source software is aimed at researchers interested
-in conducting transparent and reprodutible bibliometric analysis on
-[Scielo](http://www.scielo.br/). If you want to contribute with code
-that would improve towards that goal, feel free to start a issue.
+`rscielo` is an open-source software targeted at researchers interested
+in conducting reproducible bibliometric analysis on
+[Scielo](http://www.scielo.br/). As such, we are happy to receive
+comments or suggestions to improve the package – feel free to start a
+issue at our [GitHub repository](https://github.com/meirelesff/rscielo).
