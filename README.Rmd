@@ -3,7 +3,6 @@ output: github_document
 ---
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
-devtools::install_github("meirelesff/rscielo")
 library(rscielo)
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -19,8 +18,25 @@ rscielo
 =====
 
 [![Travis-CI Build Status](https://travis-ci.org/meirelesff/rScielo.svg?branch=master)](https://travis-ci.org/meirelesff/rScielo) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/rScielo?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/rScielo) [![Package-License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rscielo)](https://cran.r-project.org/package=rscielo)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-`rscielo` provides functions to scrape data from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/). The retrieved data includes authors' names and institutional affiliations, articles' contents and their meta-data, bibliographic references, among several others. The package also offers functions to summarize the scrapped data.
+`rscielo` provides functions to scrape bibliometric information from scientific articles hosted on the [Scientific Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/). The retrieved data includes journal's citation counts; article's contents, footnotes, bibliographic references; and many other common bibliometrics. The package also offers functions to summarize the scrapped data.
+
+
+### Installing
+
+To install the latest stable release from [CRAN](http://cran.r-project.org/), use:
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+install.packages("rscielo")
+```
+
+Alternatively, one may install the latest pre-release version from [GitHub](https://github.com/) via:
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("meirelesff/rscielo")
+```
 
 
 ### How does it work?
@@ -36,7 +52,7 @@ http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&lng=en&nrm=iso
 The ID is located between `&pid=` and `&lng` (i.e., `1981-3821`). Most `rscielo`'s functions rely on this argument to extract data. To automatically extract an ID from a journal hosted on [Scielo](http://www.scielo.br/), you may use the convenient `get_journal_id()` function:
 
 ```{r, message=FALSE, warning=FALSE}
-get_id_journal("http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&lng=en&nrm=iso")
+get_journal_id("http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&lng=en&nrm=iso")
 
 ```
 
@@ -108,22 +124,6 @@ Here is a description of the `rScielo` functions:
 * `get_journal_list()`: Gets a list with all journals' names, URLs and ID's.
 * `get_journal_metrics()`: Gets publication and citation metrics of a journal.
 
-
-### Installation
-
-Install the latest stable release from [CRAN](http://cran.r-project.org/) via:
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
-install.packages("rScielo")
-```
-
-
-Alternatively, install the latest pre-release version from [GitHub](https://github.com/) via:
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("meirelesff/rScielo")
-```
 
 
 ### Author

@@ -1,6 +1,6 @@
-#' Scrape publication and citation metrics of a journal hosted on Scielo
+#' Scrape publication and citation counts of a journal hosted on Scielo
 #'
-#' \code{get_journal_metrics()} scrapes publication and citation information
+#' \code{get_journal_metrics()} scrapes publication and citation counts
 #' of a jornal hosted on Scielo.
 #'
 #' @param journal_id a character vector with the ID of the journal hosted on
