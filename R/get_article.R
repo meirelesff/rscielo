@@ -43,8 +43,8 @@ get_article <- function(x){
 
   } else {
 
-    # Last try
-    text <-  paste(page, collapse = "\n")
+    # Collapse text
+    text <-  paste(text, collapse = "\n")
   }
 
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%

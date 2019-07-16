@@ -41,7 +41,7 @@ get_article_footnotes <- function(x){
    stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
 
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    rvest::html_text(text)
+    rvest::html_text()
 
   # Return
   tibble::tibble(footnotes = footnotes,

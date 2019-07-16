@@ -1,6 +1,6 @@
-#' Scrape publication and citation metrics of a journal hosted on Scielo
+#' Scrape publication and citation counts of a journal hosted on Scielo
 #'
-#' \code{get_journal_metrics()} scrapes publication and citation information
+#' \code{get_journal_metrics()} scrapes publication and citation counts
 #' of a jornal hosted on Scielo.
 #'
 #' @param journal_id a character vector with the ID of the journal hosted on
@@ -8,7 +8,6 @@
 #' ID from its URL).
 #'
 #' @importFrom magrittr "%>%"
-#' @import graphics
 #' @export
 #'
 #' @return The function returns a \code{tibble} with the following variables:
@@ -66,15 +65,17 @@ plot.scielo_metrics <- function(x, ...){
   y.max <- max(c(x$granted_citations, x$received_citations), na.rm = T) + 10
 
   # Main plot
-  plot(x$year, x$granted_citations,
-       type = "o",
-       ylim = c(0, y.max), bty = "l", pch = 19, col = "#1693A5",
-       cex.lab = 1.4, cex.main = 1.5, lwd = 1.3, main = "Number of citations",
-       xlab = "Year", ylab = "Citations")
+  graphics::plot(x$year, x$granted_citations,
+                 type = "o",
+                 ylim = c(0, y.max), bty = "l", pch = 19, col = "#1693A5",
+                 cex.lab = 1.4, cex.main = 1.5, lwd = 1.3, main = "Number of citations",
+                 xlab = "Year", ylab = "Citations")
 
   # Lines and legend
-  lines(x$year, x$received_citations, col = "#FBB829", type = "o", pch = 19, lwd = 1.3)
-  legend("topleft", title = NULL, legend = c("Granted", "Received"), bty = "n", lty = c(1, 1),
-         lwd = c(1.3, 1.3), col = c("#1693A5", "#FBB829"))
+  graphics::lines(x$year, x$received_citations, col = "#FBB829",
+                  type = "o", pch = 19, lwd = 1.3)
+  graphics::legend("topleft", title = NULL, legend = c("Granted", "Received"),
+                   bty = "n", lty = c(1, 1), lwd = c(1.3, 1.3),
+                   col = c("#1693A5", "#FBB829"))
 }
 

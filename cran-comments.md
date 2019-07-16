@@ -1,6 +1,6 @@
 ## Test environments
 
-* Windows 10 (personal computer), R 3.3.1
+* Windows 10 (personal computer), R 3.6.0
 * Ubuntu 12.04.5 LTS (travis-ci), R 3.2.5, 3.3.1, R-devel
 * Windows Server 2012 R2 x64 (appveyor), 3.3.1-patched
 * Win-builder (devel and release)

@@ -43,7 +43,7 @@ get_article_references <- function(x){
                              replacement = "")
 
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
-    rvest::html_text(text)
+    rvest::html_text()
 
   # Return
   tibble::tibble(references = references,
