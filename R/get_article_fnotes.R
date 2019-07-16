@@ -1,6 +1,6 @@
 #' Scrape footnotes from a single article hosted on Scielo
 #'
-#' \code{get_article_fnotes()} scrapes all the footnotes iin an article hosted
+#' \code{get_article_footnotes()} scrapes all the footnotes iin an article hosted
 #' on Scielo.
 #'
 #' @param x a character vector with the link or id of the article hosted on
@@ -19,11 +19,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_article_fnotes <- get_article_fnotes(x = "http://www.scielo.br/scielo.php?
+#' df <- get_article_fnotes(x = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }
 
-get_article_fnotes <- function(x){
+get_article_footnotes <- function(x){
 
 
   # Inputs
@@ -36,7 +36,7 @@ get_article_fnotes <- function(x){
   if(httr::status_code(page) != 200) stop("Article not found.")
 
   # Get the data
-  foot_notes <- rvest::html_nodes(page, xpath = "//div[@class='fn']") %>%
+  footnotes <- rvest::html_nodes(page, xpath = "//div[@class='fn']") %>%
    rvest::html_text() %>%
    stringr::str_replace_all(pattern = "[\n|\t|\r]", replacement = "")
 
@@ -44,7 +44,7 @@ get_article_fnotes <- function(x){
     rvest::html_text(text)
 
   # Return
-  tibble::tibble(foot_notes = foot_notes,
+  tibble::tibble(footnotes = footnotes,
                  article_id = id_select(url),
                  doi = doi)
 }

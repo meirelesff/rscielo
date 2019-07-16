@@ -118,6 +118,7 @@ get_internal <- function(issues){
 summary.Scielo <- function(object, ...) {
 
 
+  # Inputs
   journal <- as.character(object$journal[1])
   total <- nrow(object)
   total_articles <- sum(nchar(object$abstract_en) > 1 | nchar(object$abstract_pt) > 0)
@@ -129,6 +130,7 @@ summary.Scielo <- function(object, ...) {
   mean_size <- ifelse(is.nan(mean_size), "Not available", mean_size)
 
 
+  # Outputs
   out <- list(journal = journal,
               total = total,
               total_articles = total_articles,
