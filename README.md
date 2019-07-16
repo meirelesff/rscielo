@@ -18,7 +18,7 @@ from scientific journals and articles hosted on the [Scientific
 Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/).
 The retrieved data includes journal’s details and citation counts;
 article’s contents, footnotes, bibliographic references; and many other
-common information used in bibliometric studies The package also offers
+common information used in bibliometric studies. The package also offers
 functions to quickly summarize the scrapped data.
 
 ### Installing
@@ -50,24 +50,24 @@ journals (pointed by `_journal` or `_journal_` in their names) and (2)
 articles (with functions that contains `_article` or `_article_` in
 their names).
 
-### Journals
+### Data from journals
 
 #### Getting a journal’s ID
 
 To get data from an entire journal, such as citation counts and
 [ISSN](https://en.wikipedia.org/wiki/International_Standard_Serial_Number),
 the `rscielo` relies on an ID (or pid) that uniquely identifies each
-journal within the [Scielo](http://www.scielo.br/)’s repository. As an
+journal within the [Scielo](http://www.scielo.br/) repository. As an
 example, this is the URL of the [Brazilian Political Science
 Review](http://www.scielo.br/bpsr/) homepage on
 [Scielo](http://www.scielo.br/):
 
     http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&lng=en&nrm=iso
 
-The journal’s ID can be found between `&pid=` and `&lng` (i.e.,
+The journal ID can be found between `&pid=` and `&lng` (i.e.,
 `1981-3821`). Most `rscielo`’s functions that retrive data from journals
-rely on this argument to work. To automatically extract an ID from the
-URL of a journal, one may use the `get_journal_id()`
+rely on this information to work. To automatically extract an ID from
+the URL of a journal, one may use the `get_journal_id()`
 function:
 
 ``` r
@@ -77,21 +77,21 @@ get_journal_id("http://www.scielo.br/scielo.php?script=sci_serial&pid=1981-3821&
 
 #### Scraping data from a journal
 
-With a journal’s ID in hand, to scrape meta-data from all articles in
-the last issue of a journal use the `get_journal()` function:
+With a journal ID in hand, use the `get_journal()` function to scrape
+meta-data from all articles published in its last issue:
 
 ``` r
 df <- get_journal("1981-3821")
 ```
 
-The code returns a `tibble` in which all articles in the last issue of a
-journal are the observations. Among the returned variables are authors’
-names, institutional affiliations, and home countries; articles’s
-abstracts, keywords, and number of pages (check the `get_journal`
-documentation with `help(get_journal)` for a full description of the
-retrieved data).
+This code returns a `tibble` in which the observations correspond to the
+articles that appeared in the journal lastest issue. Among the returned
+variables are authors’ names, institutional affiliations, and home
+countries; articles’s abstracts, keywords, and number of pages (check
+the `get_journal` documentation with `help(get_journal)` for a full
+description of the retrieved data).
 
-For a quick glimpse in the scrapped data, one may use the `summary`
+For a quick glimpse at the scrapped data, one may use the `summary`
 method:
 
 ``` r
@@ -107,9 +107,8 @@ summary(df)
 #>  Mean number of pages per article:  Not available
 ```
 
-Finally, `get_journal()` also extracts data from all articles ever
-published by a journal. To do that, just set the argument `last_issue`
-to `FALSE`:
+`get_journal()` also extracts data from all articles ever published by a
+journal. To do that, set the argument `last_issue` to `FALSE`:
 
 ``` r
 get_journal("1981-3821", last_issue = "FALSE")
@@ -117,7 +116,7 @@ get_journal("1981-3821", last_issue = "FALSE")
 
 #### Scraping journal metrics
 
-`rscielo` also provides functions to scrape and report publication and
+`rscielo` contains functions to scrape and report publication and
 citation counts of a journal:
 
 ``` r
@@ -128,9 +127,9 @@ cit <- get_journal_metrics("1981-3821")
 plot(cit)
 ```
 
-![](README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
-#### Other information
+#### Other functions
 
 `get_journal_info()` and `get_journal_list()` scrapes a journal’s
 meta-information (publisher, ISSN, and mission) and a list of all
@@ -140,35 +139,147 @@ journals hosted on [Scielo](http://www.scielo.br/), respectively:
 # Get a journal's meta-information
 meta_info <- get_journal_info("1981-3821")
 
+
 # Get a list with all journals names, URLs and IDs
 journals <- get_journal_list()
 ```
 
-### Articles
+### Data from articles
 
 #### Getting an articles’ ID
 
-The `rscielo` also contains a function to scrape meta-data from a single
-article:
+Scientific articles stored on [Scielo](http://www.scielo.br/) are also
+identified by an unique ID – a partial combination between their Digital
+Object Identifiers
+([DOI](https://en.wikipedia.org/wiki/Digital_object_identifier)) plus
+other characters. These IDs can se seen in each article’s URL (after
+`&pid=` until `&lng=`):
 
 ``` r
-# The article's URL on Scielo
-url <- "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en"
+# URL of an article
+url_article <- "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en"
+```
 
-# Scrape the data
-article <- get_article(url)
+By design, `rscilo` handles full articles’ URLs as inputs, but users may
+obtain the IDs by using the `get_article_id` function:
+
+``` r
+get_article_id(url_article)
+#> [1] "S1981-38212016000200201"
+```
+
+#### Contents of a single article
+
+To scrape the content of a single scientific article, the `rscielo`
+provides the `get_article()` function:
+
+``` r
+# Scrape the meta-data
+article <- get_article(url_article)
+```
+
+As can be seen, the function returns the full text of the requested
+article as a `character` vector. Users may also pass the article’s ID to
+the function to achieve the same results:
+
+``` r
+article <- get_article("S1981-38212016000200201")
+```
+
+Or set the argument `output_text` to `FALSE` to get a `tibble` with the
+article’s DOI (which might be useful in bibliometric analysis):
+
+``` r
+article <- get_article("S1981-38212016000200201", output_text = FALSE)
+```
+
+#### Meta-data of an article
+
+Similar to the `get_journal()` function, `get_article_meta` returns
+meta-data of a selected article hosted on
+[Scielo](http://www.scielo.br/):
+
+``` r
+url <- "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en"
+article_meta <- get_article_meta(url)
+```
+
+#### Bibliographic references and footnotes
+
+To retrieve a list of bibliographic items cited by an article, use
+`get_article_referencs()`:
+
+``` r
+article_references <- get_article_references(url)
+```
+
+The function outputs a `tibble` in which every bibliographic item
+corresponds to an observation. `get_article_footnotes()` returns a
+similar object, but with foonotes in the rows:
+
+``` r
+article_foots <- get_article_footnotes(url)
 ```
 
 ### A list of functions
 
-For convinience, here is a description of the `rScielo` functions:
+For convinience, here is a description of the `rScielo` functions.
 
-  - `get_id_journal()`: Gets a journal’s ID from its url.
-  - `get_journal()`: Gets meta-data from all articles published by a
+**Function to extract data from journals:**
+
+  - `get_journal_id()`: Get a journal’s ID from its URL.
+  - `get_journal()`: Get meta-data of all articles published by a
     journal.
-  - `get_article()`: Gets meta-data from a single article.
-  - `get_journal_info()`: Gets a journal’s description.
-  - `get_journal_list()`: Gets a list with all journals’ names, URLs and
+  - `get_journal_info()`: Get a journal’s description.
+  - `get_journal_list()`: Get a list with all journals’ names, URLs and
     ID’s.
-  - `get_journal_metrics()`: Gets publication and citation metrics of a
+  - `get_journal_metrics()`: Get publication and citation counts of a
     journal.
+
+**Function to extract data from articles:**
+
+  - `get_article_id()`: Get an article’s ID from its URL.
+  - `get_article()`: Get the full text of a single article.
+  - `get_article_meta()`: Get meta-data of a single article.
+  - `get_article_referencs()`: Get the list of bibliographic references
+    cited by a single article.
+  - `get_article_footnotes()`: Get the list of the footnotes of a single
+    article.
+
+**Methods:**
+
+  - `summary.Scielo()`: Summarize the data of a `tibble` returned by
+    `get_journal`.
+  - `plot.scielo_metrics()`: Plot citation counts of a journal retrieved
+    by `get_journal_metrics`.
+
+### Citation
+
+To cite `rscielo` in publications, use:
+
+``` r
+citation("rscielo")
+#> 
+#> To cite package 'rscielo' in publications use:
+#> 
+#>   Fernando Meireles and Denisson Silva (2019). rscielo: A Scraper
+#>   for Scientific Journals Hosted on Scielo. R package version
+#>   1.0.0. https://github.com/meirelesff/rscielo
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {rscielo: A Scraper for Scientific Journals Hosted on Scielo},
+#>     author = {Fernando Meireles and Denisson Silva},
+#>     year = {2019},
+#>     note = {R package version 1.0.0},
+#>     url = {https://github.com/meirelesff/rscielo},
+#>   }
+```
+
+### Contributions
+
+`rscielo` in an open-source software is aimed at researchers interested
+in conducting transparent and reprodutible bibliometric analysis on
+[Scielo](http://www.scielo.br/). If you want to contribute with code
+that would improve towards that goal, feel free to start a issue.

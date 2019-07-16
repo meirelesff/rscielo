@@ -5,7 +5,7 @@ Version: 1.0.0
 Authors@R: c(
     person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre"), c(ORCID = "0000-0002-7027-2058")),
     person("Denisson", "Silva", , "silvadenisson@ufmg.br", c("aut"), c(ORCID = "0000-0003-2771-8146")),
-    person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("ctb"), c(ORCID = "0000-0002-7027-2058"))
+    person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("aut"), c(ORCID = "0000-0002-7027-2058"))
     )
 Description: Scrapes data from scientific articles hosted on the Scientific 
     Electronic Library Online Platform (Scielo). The data information includes 
