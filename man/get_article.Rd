@@ -4,14 +4,19 @@
 \alias{get_article}
 \title{Scrape text from a single article hosted on Scielo}
 \usage{
-get_article(x)
+get_article(x, output_text = TRUE)
 }
 \arguments{
 \item{x}{a character vector with the link or id of the article hosted on
 Scielo to be scrapped.}
+
+\item{output_text}{a logical indicating whether \code{get_article()} should return
+a \code{character} vector or a \code{tibble} (defaults to \code{TRUE}).}
 }
 \value{
-The function returns a \code{tibble} with the following variables:
+When the argument \code{output_text} is \code{TRUE}, the function returns
+a \code{character} vector with the requested article's content. When \code{output_text}
+is \code{FALSE}, the function returns a \code{tibble} with the following variables:
 
 \itemize{
   \item text: article's content (\code{character}).

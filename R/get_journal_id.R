@@ -1,12 +1,12 @@
-#' Get the ID of journal hosted on Scielo
+#' Get the ID of a journal hosted on Scielo
 #'
-#' \code{get_journal_id()} extracts the numerical ID (pid) from a journal's url.
+#' \code{get_journal_id()} extracts the numerical ID (pid) from a journal's URL.
 #'
-#' @param url a character vector with the url of the journal hosted on Scielo.
+#' @param url a character vector with the URL of a journal hosted on Scielo.
 #'
 #' @export
 #'
-#' @return The function returns an character vector with the journal numerical ID.
+#' @return The function returns a \code{character} vector with the journal ID.
 #'
 #' @examples
 #' \dontrun{

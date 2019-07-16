@@ -4,10 +4,14 @@
 #'
 #' @param x a character vector with the link or id of the article hosted on
 #' Scielo to be scrapped.
+#' @param output_text a logical indicating whether \code{get_article()} should return
+#' a \code{character} vector or a \code{tibble} (defaults to \code{TRUE}).
 #'
 #' @export
 #'
-#' @return The function returns a \code{tibble} with the following variables:
+#' @return When the argument \code{output_text} is \code{TRUE}, the function returns
+#' a \code{character} vector with the requested article's content. When \code{output_text}
+#' is \code{FALSE}, the function returns a \code{tibble} with the following variables:
 #'
 #' \itemize{
 #'   \item text: article's content (\code{character}).
@@ -21,7 +25,7 @@
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }
 
-get_article <- function(x){
+get_article <- function(x, output_text = TRUE){
 
 
   # Inputs
@@ -47,10 +51,14 @@ get_article <- function(x){
     text <-  paste(text, collapse = "\n")
   }
 
+  # Return
+  # First case
+  if(output_text) return(text)
+
+  # Second case
   doi <- rvest::html_nodes(page, xpath = '//*[@id="doi"]') %>%
     rvest::html_text()
 
-  # Return
   tibble::tibble(text = text,
                  article_id = id_select(x),
                  doi = doi)

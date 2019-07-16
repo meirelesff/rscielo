@@ -2,18 +2,18 @@
 % Please edit documentation in R/get_journal_id.R
 \name{get_journal_id}
 \alias{get_journal_id}
-\title{Get the ID of journal hosted on Scielo}
+\title{Get the ID of a journal hosted on Scielo}
 \usage{
 get_journal_id(url)
 }
 \arguments{
-\item{url}{a character vector with the url of the journal hosted on Scielo.}
+\item{url}{a character vector with the URL of a journal hosted on Scielo.}
 }
 \value{
-The function returns an character vector with the journal numerical ID.
+The function returns a \code{character} vector with the journal ID.
 }
 \description{
-\code{get_journal_id()} extracts the numerical ID (pid) from a journal's url.
+\code{get_journal_id()} extracts the numerical ID (pid) from a journal's URL.
 }
 \examples{
 \dontrun{

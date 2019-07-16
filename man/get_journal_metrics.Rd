@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_journal_metrics.R
 \name{get_journal_metrics}
 \alias{get_journal_metrics}
-\title{Scrape publication and citation metrics of a journal hosted on Scielo}
+\title{Scrape publication and citation counts of a journal hosted on Scielo}
 \usage{
 get_journal_metrics(journal_id)
 }
@@ -25,7 +25,7 @@ The function returns a \code{tibble} with the following variables:
 }
 }
 \description{
-\code{get_journal_metrics()} scrapes publication and citation information
+\code{get_journal_metrics()} scrapes publication and citation counts
 of a jornal hosted on Scielo.
 }
 \examples{
