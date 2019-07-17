@@ -43,17 +43,20 @@ get_article <- function(x, output_text = TRUE){
   if(httr::status_code(page) != 200) stop("Article not found.")
 
   # Get the data
+  metodo <- 1 # tirar
   text <- get_article_strategy1(page)
 
   if(length(text) == 0) {
 
     # Second and third shots
     text <- get_article_strategy2(page)
+    metodo <- 2 # tirar
 
   } else {
 
     # Collapse text
     text <-  paste(text, collapse = "\n")
+    metodo <- 3 # tirar
   }
 
   # Return
@@ -66,5 +69,6 @@ get_article <- function(x, output_text = TRUE){
 
   tibble::tibble(text = text,
                  article_id = id_select(x),
-                 doi = doi)
+                 doi = doi,
+                 metodo = metodo)
 }
