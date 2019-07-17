@@ -58,7 +58,6 @@ get_article <- function(x, output_text = TRUE){
 
     # Collapse text
     text <-  paste(text, collapse = "\n")
-    metodo <- 4 # tirar
   }
 
   # Return
