@@ -108,10 +108,12 @@ get_article_strategy2 <- function(page){
   if(length(test_strategy2) == 1) {
 
     # Third strategy
+    metodo <- 3 # tirar
     text <- get_article_strategy3(page)
 
   } else {
 
+    metodo <- 2 # tirar
     xpathScieloPatterns <- c("//div[@class='content']/div/font/p",
                              "//div[@class='content']/div/font/p/preceding-sibling::comment()",
                              "//div[@class='content']/div/font/p/comment()",
@@ -143,7 +145,7 @@ get_article_strategy2 <- function(page){
     text <- paste(text, collapse = " \n ")
   }
 
-  text
+  list(text = text, metodo = metodo)
 }
 
 

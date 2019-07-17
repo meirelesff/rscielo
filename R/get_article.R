@@ -49,14 +49,16 @@ get_article <- function(x, output_text = TRUE){
   if(length(text) == 0) {
 
     # Second and third shots
-    text <- get_article_strategy2(page)
-    metodo <- 2 # tirar
+    #text <- get_article_strategy2(page)
+    out <- get_article_strategy2(page)
+    text <- out$text
+    metodo <- out$metodo
 
   } else {
 
     # Collapse text
     text <-  paste(text, collapse = "\n")
-    metodo <- 3 # tirar
+    metodo <- 4 # tirar
   }
 
   # Return
