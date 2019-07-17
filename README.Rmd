@@ -213,6 +213,11 @@ For convenience, here is a description of the `rscielo` functions.
 * `plot.scielo_metrics()`: Plot citation counts of a journal retrieved by `get_journal_metrics`.
 
 
+### A note about the data
+
+The `rscielo`'s functions extract data directly from the [Scielo](http://www.scielo.br/) online repository. Since the journals in the database are maintained by different organizations and editorial teams, sometimes users might find errors or get incomplete information when using the package's functions. In most situations, a bit of data cleaning solves the issues. In any case, users must be aware that the retrieved data might be invalid or incomplete.
+
+
 ### Citation
 
 To cite `rscielo` in publications, use:
