@@ -19,12 +19,19 @@ a \code{character} vector with the requested article's content. When \code{outpu
 is \code{FALSE}, the function returns a \code{tibble} with the following variables:
 
 \itemize{
-  \item text: article's content (\code{character}).
+  \item text: article's full text (\code{character}).
   \item doi: article's Digital Object Identifier (DOI, (\code{character})).
 }
 }
 \description{
-\code{get_article()} scrapes text from an article hosted on Scielo.
+\code{get_article()} scrapes the full text from an article hosted on Scielo.
+In bilingual journals, the text retrieved is in the journal's main language
+ used for publication (most of the time, it is English).
+}
+\note{
+Sometimes, the Scielo website is offline for maintaince,
+in which cases this function will not work (i.e., users will get HTML status
+different from the usual 200 OK).
 }
 \examples{
 \dontrun{

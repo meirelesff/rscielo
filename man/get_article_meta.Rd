@@ -44,9 +44,17 @@ This functions scrapes several meta-data information, such as
 author's names, article title, year of publication, journal issue and number
 of pages.
 }
+\note{
+Sometimes, the Scielo website is offline for maintaince,
+in which cases this function will not work (i.e., users will get HTML status
+different from the usual 200 OK).
+}
 \examples{
 \dontrun{
 article_meta <- get_article_meta(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }
+}
+\seealso{
+\code{\link{get_journal}}
 }

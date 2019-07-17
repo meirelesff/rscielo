@@ -1,7 +1,7 @@
 #' Scrape bibliographic references from a single article hosted on Scielo
 #'
-#' \code{get_article_references()} scrapes bibliographic references information
-#' from an article hosted on Scielo.
+#' \code{get_article_references()} scrapes a list of bibliographic references
+#' cited by an article hosted on Scielo.
 #'
 #' @param x a character vector with the link or the id of the article hosted on Scielo
 #' to be scrapped.
@@ -16,6 +16,9 @@
 #'   \item doi: article's Digital Object Identifier (DOI).
 #' }
 #'
+#' @note Sometimes, the Scielo website is offline for maintaince,
+#' in which cases this function will not work (i.e., users will get HTML status
+#' different from the usual 200 OK).
 #'
 #' @examples
 #' \dontrun{

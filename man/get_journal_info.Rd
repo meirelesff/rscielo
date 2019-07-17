@@ -18,6 +18,11 @@ The function returns a \code{tibble} with the journal's description.
 \code{get_journal_info()} scrapes the description (publisher, issn, and mission)
  information of a journal hosted on Scielo.
 }
+\note{
+Sometimes, the Scielo website is offline for maintaince,
+in which cases this function will not work (i.e., users will get HTML status
+different from the usual 200 OK).
+}
 \examples{
 \dontrun{
 journal_info <- get_journal_info(journal_id = "1981-3821")

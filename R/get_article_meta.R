@@ -33,6 +33,12 @@
 #'   \item n_refs: Number of references.
 #' }
 #'
+#' @note Sometimes, the Scielo website is offline for maintaince,
+#' in which cases this function will not work (i.e., users will get HTML status
+#' different from the usual 200 OK).
+#'
+#' @seealso \code{\link{get_journal}}
+#'
 #' @details This functions scrapes several meta-data information, such as
 #' author's names, article title, year of publication, journal issue and number
 #' of pages.

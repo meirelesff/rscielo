@@ -22,6 +22,10 @@
 #'   journal in that year.
 #' }
 #'
+#' @note Sometimes, the Scielo website is offline for maintaince,
+#' in which cases this function will not work (i.e., users will get HTML status
+#' different from the usual 200 OK).
+#'
 #' @examples
 #' \dontrun{
 #' df <- get_journal_metrics(journal_id = "1981-3821")

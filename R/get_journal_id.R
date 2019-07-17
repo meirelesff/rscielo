@@ -24,3 +24,8 @@ get_journal_id <- function(url){
   # Return
   stringr::str_split(url, "=|&", simplify = T)[, 4]
 }
+
+
+
+
+

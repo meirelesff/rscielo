@@ -39,17 +39,29 @@ The function returns a \code{tibble} with the following variables:
 }
 }
 \description{
-\code{get_journal()} scrapes meta-data information from all the articles of a
- journal hosted on Scielo.
+\code{get_journal()} scrapes meta-data information from articles of a
+ journal hosted on Scielo. In bilingual journals, articles' titles, abstracts
+ and other relevant information are retrieved in the journal's main language
+ used for publication (most of the time, it is English). The function can extract
+ information from all articles ever published by the journal or only the ones
+ in its latest issue.
 }
 \details{
 This functions scrapes several meta-data information, such as
 author's names, articles' titles, year of publication, edition and number of pages,
  that can be summarized with specific \code{summary} method.
 }
+\note{
+Sometimes, the Scielo website is offline for maintaince,
+in which cases this function will not work (i.e., users will get HTML status
+different from the usual 200 OK).
+}
 \examples{
 \dontrun{
 df <- get_journal(journal_id = "1981-3821")
 summary(df)
 }
+}
+\seealso{
+\code{\link{get_article_meta}}
 }

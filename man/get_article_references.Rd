@@ -19,8 +19,13 @@ The function a \code{tibble} with the following variables:
 }
 }
 \description{
-\code{get_article_references()} scrapes bibliographic references information
-from an article hosted on Scielo.
+\code{get_article_references()} scrapes a list of bibliographic references
+cited by an article hosted on Scielo.
+}
+\note{
+Sometimes, the Scielo website is offline for maintaince,
+in which cases this function will not work (i.e., users will get HTML status
+different from the usual 200 OK).
 }
 \examples{
 \dontrun{

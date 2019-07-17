@@ -1,7 +1,11 @@
 #' Scrape meta-data from articles published by a journal hosted on Scielo
 #'
-#' \code{get_journal()} scrapes meta-data information from all the articles of a
-#'  journal hosted on Scielo.
+#' \code{get_journal()} scrapes meta-data information from articles of a
+#'  journal hosted on Scielo. In bilingual journals, articles' titles, abstracts
+#'  and other relevant information are retrieved in the journal's main language
+#'  used for publication (most of the time, it is English). The function can extract
+#'  information from all articles ever published by the journal or only the ones
+#'  in its latest issue.
 #'
 #' @param journal_id a character vector with the ID of the journal hosted on Scielo
 #'  (the \code{get_ournal_id} function can be used to find the journal ID from its URL).
@@ -34,6 +38,12 @@
 #'   \item n_pages: Number of pages.
 #'   \item n_refs: Number of references.
 #' }
+#'
+#' @note Sometimes, the Scielo website is offline for maintaince,
+#' in which cases this function will not work (i.e., users will get HTML status
+#' different from the usual 200 OK).
+#'
+#' @seealso \code{\link{get_article_meta}}
 #'
 #' @details This functions scrapes several meta-data information, such as
 #' author's names, articles' titles, year of publication, edition and number of pages,
@@ -83,8 +93,15 @@ get_links <- function(journal_id, last_issue = FALSE){
 
     ed <- page %>%
       rvest::html_nodes("b a") %>%
-      rvest::html_attr("href") %>%
-      purrr::pluck(1)
+      rvest::html_attr("href")
+
+    latest <- stringr::str_split(ed, "=|&", simplify = T)[, 4] %>%
+      stringr::str_sub(10, 17) %>%
+      as.numeric() %>%
+      max(na.rm = T) %>%
+      as.character()
+
+    ed <- ed[stringr::str_detect(ed, latest)]
 
   } else { # All issues
 
@@ -105,10 +122,16 @@ get_links <- function(journal_id, last_issue = FALSE){
 
 # Function to get articles' links in each journal's issue
 get_internal <- function(issues){
+
+  # Inputs
   links <- xml2::read_html(issues) %>%
     rvest::html_nodes(".content div a") %>%
     rvest::html_attr("href")
-  links[grepl("sci_arttext", links)]
+
+  # Return
+  links[stringr::str_detect(links, "sci_arttext")] %>%
+    stringr::str_sub(1, 93) %>%
+    unique()
 }
 
 

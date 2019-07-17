@@ -10,6 +10,10 @@
 #' @importFrom magrittr "%>%"
 #' @export
 #'
+#' @note Sometimes, the Scielo website is offline for maintaince,
+#' in which cases this function will not work (i.e., users will get HTML status
+#' different from the usual 200 OK).
+#'
 #' @return The function returns a \code{tibble} with the journal's description.
 #'
 #' @examples

@@ -222,7 +222,7 @@ article_foots <- get_article_footnotes(url)
 
 ### A list of functions
 
-For convenience, here is a description of the `rScielo` functions.
+For convenience, here is a description of the `rscielo` functions.
 
 **Function to extract data from journals:**
 
@@ -280,6 +280,6 @@ citation("rscielo")
 
 `rscielo` is an open-source software targeted at researchers interested
 in conducting reproducible bibliometric analysis on
-[Scielo](http://www.scielo.br/). As such, we are happy to receive
-comments or suggestions to improve the package – feel free to start a
-issue at our [GitHub repository](https://github.com/meirelesff/rscielo).
+[Scielo](http://www.scielo.br/). As such, we welcome comments or
+suggestions to improve the package – feel free to start a issue at our
+[GitHub repository](https://github.com/meirelesff/rscielo).
