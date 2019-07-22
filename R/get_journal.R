@@ -64,6 +64,7 @@ get_journal <- function(journal_id, last_issue = TRUE){
   # Get the data
   scielo_data <- get_links(journal_id, last_issue) %>%
     purrr::map(get_xml_article) %>%
+    purrr::discard(is.logical) %>%
     dplyr::bind_rows()
 
   message("\nDone.\n\n")
