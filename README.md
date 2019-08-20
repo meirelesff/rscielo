@@ -13,13 +13,13 @@ Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/rScielo?br
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-`rscielo` provides functions to easily scrape bibliometric information
+`rscielo` offers functions to easily scrape bibliometric information
 from scientific journals and articles hosted on the [Scientific
 Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/).
 The retrieved data includes a journal’s details and citation counts;
 article’s contents, footnotes, bibliographic references; and several
 other common information used in bibliometric studies. The package also
-offers functions to quickly summarize the scrapped data.
+provides functions to quickly summarize the scrapped data.
 
 ### Installing
 
@@ -99,10 +99,10 @@ summary(df)
 #> ### JOURNAL: Brazilian Political Science Review
 #> 
 #> 
-#>  Total number of articles:  9 
-#>  Total number of articles (reviews excluded):  7
+#>  Total number of articles:  1 
+#>  Total number of articles (reviews excluded):  1
 #> 
-#>  Mean number of authors per article:  2 
+#>  Mean number of authors per article:  5 
 #>  Mean number of pages per article:  Not available
 ```
 
@@ -254,13 +254,14 @@ For convenience, here is a description of the `rscielo` functions.
 
 ### A note about the data
 
-The `rscielo`’s functions extract data directly from the
-[Scielo](http://www.scielo.br/) online repository. Since the journals in
-the database are maintained by different organizations and editorial
-teams, sometimes users might find errors or get incomplete information
-when using the package’s functions. In most situations, a bit of data
-cleaning solves the issues. In any case, users must be aware that the
-retrieved data might be invalid or incomplete.
+The `rscielo`‘s functions extract data directly from the
+[Scielo](http://www.scielo.br/) online repository. In any event,
+sometimes users might find errors or obtain incomplete information when
+using its functions, mainly when using the `_article` ones to scrape
+articles’ full contents. This happens when journals feeds invalid or
+wrongly formatted information into the Scielo platform. In most
+situations, a bit of data cleaning solves the issues, but users must be
+aware that the retrieved data still might be lacking.
 
 ### Citation
 
@@ -288,8 +289,6 @@ citation("rscielo")
 
 ### Contributions
 
-`rscielo` is an open-source software targeted at researchers interested
-in conducting reproducible bibliometric analysis on
-[Scielo](http://www.scielo.br/). As such, we welcome comments or
-suggestions to improve the package – feel free to start a issue at our
-[GitHub repository](https://github.com/meirelesff/rscielo).
+We welcome comments or suggestions to improve the package. Feel free to
+start a issue at our [GitHub
+repository](https://github.com/meirelesff/rscielo).
