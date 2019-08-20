@@ -28,7 +28,7 @@ rscielo
 
 ### Installing
 
-To install the latest stable release of `rscielo` from [CRAN](http://cran.r-project.org/), use:
+To install the latest stable release of `rscielo` from [CRAN](https://cran.r-project.org/), use:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 install.packages("rscielo")

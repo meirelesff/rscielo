@@ -24,7 +24,7 @@ provides functions to quickly summarize the scrapped data.
 ### Installing
 
 To install the latest stable release of `rscielo` from
-[CRAN](http://cran.r-project.org/), use:
+[CRAN](https://cran.r-project.org/), use:
 
 ``` r
 install.packages("rscielo")
