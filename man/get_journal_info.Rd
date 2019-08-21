@@ -24,7 +24,7 @@ in which cases this function will not work (i.e., users will get HTML status
 different from the usual 200 OK).
 }
 \examples{
-\dontrun{
+\donttest{
 journal_info <- get_journal_info(journal_id = "1981-3821")
 }
 }

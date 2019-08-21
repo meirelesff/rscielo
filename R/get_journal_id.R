@@ -9,7 +9,7 @@
 #' @return The function returns a \code{character} vector with the journal ID.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' id <- get_journal_id(url = "http://www.scielo.br/scielo.php?
 #' script=sci_serial&pid=1981-3821&lng=en&nrm=iso")
 #' }

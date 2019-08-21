@@ -28,7 +28,7 @@ in which cases this function will not work (i.e., users will get HTML status
 different from the usual 200 OK).
 }
 \examples{
-\dontrun{
+\donttest{
 df <- get_article_fnotes(x = "http://www.scielo.br/scielo.php?
 script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }

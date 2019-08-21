@@ -21,7 +21,7 @@
 #' different from the usual 200 OK).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' refs <- get_article_references(x = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }

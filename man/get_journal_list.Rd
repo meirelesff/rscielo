@@ -14,7 +14,7 @@ The function returns a \code{tibble} with each journal's title, ID, and URL
 all journals hosted on Scielo.
 }
 \examples{
-\dontrun{
+\donttest{
 journal_list <- get_journal_list()
 }
 }

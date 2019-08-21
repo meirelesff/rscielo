@@ -16,7 +16,7 @@ The function returns a \code{character} vector with the journal ID.
 \code{get_journal_id()} extracts the numerical ID (pid) from a journal's URL.
 }
 \examples{
-\dontrun{
+\donttest{
 id <- get_journal_id(url = "http://www.scielo.br/scielo.php?
 script=sci_serial&pid=1981-3821&lng=en&nrm=iso")
 }

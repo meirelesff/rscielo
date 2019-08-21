@@ -9,7 +9,7 @@
 #' @return The function returns a \code{tibble} with each journal's title, ID, and URL
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' journal_list <- get_journal_list()
 #' }
 

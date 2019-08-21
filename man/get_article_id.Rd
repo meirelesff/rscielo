@@ -16,7 +16,7 @@ The function returns a \code{character} vector with the article ID.
 \code{get_article_id()} extracts the ID of an article's URL
 }
 \examples{
-\dontrun{
+\donttest{
 id <- get_article_id(url = "http://www.scielo.br/scielo.php?script=sci_arttext&
 pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 }

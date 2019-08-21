@@ -50,7 +50,7 @@
 #'  that can be summarized with specific \code{summary} method.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- get_journal(journal_id = "1981-3821")
 #' summary(df)
 #' }

@@ -19,7 +19,7 @@ Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/).
 The retrieved data includes a journal’s details and citation counts;
 article’s contents, footnotes, bibliographic references; and several
 other common information used in bibliometric studies. The package also
-provides functions to quickly summarize the scrapped data.
+provides functions to quickly summarize the scraped data.
 
 ### Installing
 
@@ -90,7 +90,7 @@ and home countries; articles’ abstracts, keywords, and the number of
 pages (check the `get_journal` documentation executing
 `help(get_journal)` for a full description of the retrieved data).
 
-For a quick glimpse at the scrapped data, one may use the `summary`
+For a quick glimpse at the scraped data, one may use the `summary`
 method:
 
 ``` r

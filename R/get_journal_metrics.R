@@ -27,7 +27,7 @@
 #' different from the usual 200 OK).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- get_journal_metrics(journal_id = "1981-3821")
 #' }
 

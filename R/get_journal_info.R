@@ -17,7 +17,7 @@
 #' @return The function returns a \code{tibble} with the journal's description.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' journal_info <- get_journal_info(journal_id = "1981-3821")
 #' }
 

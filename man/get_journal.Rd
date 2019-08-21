@@ -57,7 +57,7 @@ in which cases this function will not work (i.e., users will get HTML status
 different from the usual 200 OK).
 }
 \examples{
-\dontrun{
+\donttest{
 df <- get_journal(journal_id = "1981-3821")
 summary(df)
 }

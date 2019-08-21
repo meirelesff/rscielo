@@ -44,7 +44,7 @@
 #' of pages.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' article_meta <- get_article_meta(x = "http://www.scielo.br/scielo.php?
 #' script=sci_arttext&pid=S1981-38212016000200201&lng=en&nrm=iso&tlng=en")
 #' }

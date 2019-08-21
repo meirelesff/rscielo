@@ -8,10 +8,9 @@ Authors@R: c(
     person("Rogerio", "Barbosa", , "antrologos@gmail.com", c("aut"), c(ORCID = "0000-0002-7027-2058"))
     )
 Description: Scrapes data from scientific articles hosted on the Scientific 
-    Electronic Library Online Platform (Scielo). The data information includes 
-    author's names, articles' titles and texts and bibliographic references, 
-    year of the publication, among others. The package also provides additional 
-    functions to easily summarize the scraped data.
+    Electronic Library Online Platform <http://www.scielo.br/>. The data 
+    information includes author's names, articles' metadata and contents, among others. 
+    The package also provides additional functions to easily summarize the scraped data.
 License: GPL-3
 Depends:
     R (>= 3.1)

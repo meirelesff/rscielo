@@ -1,3 +1,6 @@
+* In this resubmission, we included the URL for Scielo in the Description, and
+also replaced all \dontrun{} for \donttest{} in Rd-files.
+
 ## Test environments
 
 * Windows 10 (personal computer), R 3.6.1
