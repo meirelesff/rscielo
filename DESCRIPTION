@@ -24,7 +24,8 @@ Imports:
     stringr,
     tibble,
     purrr,
-    dplyr
+    dplyr,
+    rlang
 LazyData: TRUE
 URL: https://github.com/meirelesff/rscielo
 BugReports: https://github.com/meirelesff/rscielo/issues

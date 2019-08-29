@@ -4,6 +4,7 @@
 #' all journals hosted on Scielo.
 #'
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 #' @export
 #'
 #' @return The function returns a \code{tibble} with each journal's title, ID, and URL
@@ -36,3 +37,8 @@ get_journal_list <- function(){
                  id = ids,
                  url = urls)
 }
+
+
+
+
+
