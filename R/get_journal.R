@@ -77,7 +77,7 @@ get_journal <- function(journal_id, last_issue = TRUE){
 
 
 # Function to extract the XML links for each article in a journal
-get_links <- function(journal_id, last_issue = FALSE){
+get_links <- function(journal_id, last_issue = TRUE){
 
 
   # Get the page
