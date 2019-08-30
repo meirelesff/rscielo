@@ -1,13 +1,12 @@
 #' Get the ID of a journal hosted on Scielo
 #'
-#' \code{get_journal_id()} extracts the numerical ID (pid) from one or more
-#'  journals' URLs.
+#' \code{get_journal_id()} extracts the numerical ID (pid) from a journal's URL.
 #'
-#' @param url a character vector with the URL of one or more journals hosted on Scielo.
+#' @param url a character vector with the URL of a journal hosted on Scielo.
 #'
 #' @export
 #'
-#' @return The function returns a \code{character} vector with the journals ID.
+#' @return The function returns a \code{character} vector with the journal ID.
 #'
 #' @examples
 #' \donttest{
@@ -18,13 +17,8 @@
 get_journal_id <- function(url){
 
   # Inputs
-  if(!is.character(url) | !stringr::str_detect(url, "scielo")) stop("Invalid 'url'.")
+  if(!is.character(url)) stop("Invalid 'url'.")
 
   # Return
-  ids <- stringr::str_split(url, "=|&", simplify = T)[, 4]
+  stringr::str_split(url, "=|&", simplify = T)[, 4]
 }
-
-
-
-
-

@@ -17,28 +17,15 @@
 get_journal_list <- function(){
 
 
-  # Read the page
-  page <- rvest::html_session("http://www.scielo.br/scielo.php?script=sci_alphabetic&nrm=iso")
-  if(httr::status_code(page) != 200) stop("Unnable to connect.")
-
-  # Get the data
-  titles <- rvest::html_nodes(page, ".linkado > a") %>%
-    rvest::html_text() %>%
-    stringr::str_replace_all("\n    |\n   ", "")
-
-  urls <- rvest::html_nodes(page, ".linkado > a") %>%
-    rvest::html_attrs() %>%
-    as.character()
-
-  ids <- stringr::str_split(urls, "=|&", simplify = T)[, 4]
-
-  # Return
-  tibble::tibble(title = titles,
-                 id = ids,
-                 url = urls)
+  # Read and return the data
+  utils::read.csv("https://www.scielo.org/pt/periodicos/listar-por-assunto///?export=csv",
+           stringsAsFactors = FALSE,
+           encoding = "UTF-8") %>%
+    stats::setNames(c("journal", "journal_url", "publisher", "status")) %>%
+    dplyr::filter(!is.na(.data$journal_url)) %>%
+    dplyr::filter(.data$journal_url != " ") %>%
+    dplyr::mutate(journal_id = get_journal_id(.data$journal_url))
 }
-
-
 
 
 

@@ -73,20 +73,7 @@ is.scielo <- function(x) inherits(x, "Scielo")
 
 
 # id select
-id_select <- function(x){
-
-  if(stringr::str_detect(x, "http")) {
-
-    article_id <- stringr::str_split(x, "=|&", simplify = T)[, 4]
-
-  } else {
-
-    article_id <- x
-  }
-
-  return(article_id)
-}
-
+id_select <- function(x) stringr::str_split(x, "=|&", simplify = T)[, 4]
 
 
 # First strategy to extract article text
@@ -266,6 +253,38 @@ get_article_strategy3 <- function(page){
 
   text
 }
+
+
+# Function to build a journal URL
+build_journal_url <- function(journal_id){
+
+  # Check if ISSN exists
+  stopifnot(journal_id %in% journals$journal_id)
+
+  # Build the correct URL
+  paste0(
+    journals$journal_base[journals$journal_id == journal_id],
+    "scielo.php?script=sci_issues&pid=%s&nrm=iso"
+  ) %>%
+    sprintf(journal_id)
+}
+
+
+# Function to build an article URL
+build_article_url <- function(article_id, journal_id){
+
+  # Check if ISSN exists
+  stopifnot(journal_id %in% journals$journal_id)
+
+  # Build the correct URL
+  paste0(
+    journals$journal_base[journals$journal_id == journal_id],
+    "scieloOrg/php/articleXML.php?pid=%s"
+  ) %>%
+    sprintf(article_id)
+}
+
+
 
 
 # Avoid the R CMD check note about magrittr's dot

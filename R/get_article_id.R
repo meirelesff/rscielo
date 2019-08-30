@@ -17,9 +17,7 @@
 get_article_id <- function(url){
 
   # Inputs
-  if(!is.character(url) | length(url) != 1) stop("Invalid 'url'.")
-  page <- rvest::html_session(url)
-  if(httr::status_code(page) != 200) stop("Article not found.")
+  if(!is.character(url)) stop("Invalid 'url'.")
 
   # Return
   id_select(url)

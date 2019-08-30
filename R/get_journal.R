@@ -81,7 +81,7 @@ get_links <- function(journal_id, last_issue = FALSE){
 
 
   # Get the page
-  page <- sprintf("http://www.scielo.br/scielo.php?script=sci_issues&pid=%s&nrm=iso", journal_id) %>%
+  page <- build_journal_url(journal_id) %>%
     rvest::html_session()
   if(httr::status_code(page) != 200) stop("Journal not found.")
 
@@ -115,8 +115,8 @@ get_links <- function(journal_id, last_issue = FALSE){
   ed %>%
     purrr::map(get_internal) %>%
     purrr::flatten_chr() %>%
-    stringr::str_sub(56, 78) %>%
-    sprintf("http://www.scielo.br/scieloOrg/php/articleXML.php?pid=%s", .)
+    id_select() %>%
+    build_article_url(journal_id)
 }
 
 

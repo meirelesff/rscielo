@@ -15,11 +15,12 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 
 `rscielo` offers functions to easily scrape bibliometric information
 from scientific journals and articles hosted on the [Scientific
-Electronic Library Online Platform (Scielo.br)](http://www.scielo.br/).
-The retrieved data includes a journal’s details and citation counts;
-article’s contents, footnotes, bibliographic references; and several
-other common information used in bibliometric studies. The package also
-provides functions to quickly summarize the scraped data.
+Electronic Library Online Platform
+(Scielo.org)](https://www.scielo.org). The retrieved data includes a
+journal’s details and citation counts; article’s contents, footnotes,
+bibliographic references; and several other common information used in
+bibliometric studies. The package also provides functions to quickly
+summarize the scraped data.
 
 ### Installing
 
@@ -274,7 +275,8 @@ citation("rscielo")
 #> 
 #>   Fernando Meireles, Denisson Silva and Rogerio Barbosa (2019).
 #>   rscielo: A Scraper for Scientific Journals Hosted on Scielo. R
-#>   package version 1.0.0. https://github.com/meirelesff/rscielo
+#>   package version 1.0.0.
+#>   https://CRAN.R-project.org/package=rscielo
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -283,7 +285,7 @@ citation("rscielo")
 #>     author = {Fernando Meireles and Denisson Silva and Rogerio Barbosa},
 #>     year = {2019},
 #>     note = {R package version 1.0.0},
-#>     url = {https://github.com/meirelesff/rscielo},
+#>     url = {https://CRAN.R-project.org/package=rscielo},
 #>   }
 ```
 

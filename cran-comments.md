@@ -1,6 +1,3 @@
-* In this resubmission, we included the URL for Scielo in the Description, and
-also replaced all \dontrun{} for \donttest{} in Rd-files.
-
 ## Test environments
 
 * Windows 10 (personal computer), R 3.6.1
@@ -18,4 +15,4 @@ This is the name of the online repository the package's functions retrieve data 
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+Currently, there are no reverse dependencies.
