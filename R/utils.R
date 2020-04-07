@@ -274,7 +274,7 @@ build_journal_url <- function(journal_id){
 build_article_url <- function(article_id, journal_id){
 
   # Check if ISSN exists
-  stopifnot(journal_id %in% journals$journal_id)
+  #stopifnot(journal_id %in% journals$journal_id)
 
   # Build the correct URL
   paste0(
