@@ -125,7 +125,7 @@ get_links <- function(journal_id, last_issue = TRUE){
 get_internal <- function(issues){
 
   # Inputs
-  links <- xml2::read_html(issues) %>%
+  links <- xml2::session(issues) %>%
     rvest::html_nodes(".content div a") %>%
     rvest::html_attr("href")
 
