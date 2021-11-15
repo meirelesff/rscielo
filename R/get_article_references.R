@@ -35,7 +35,7 @@ get_article_references <- function(x){
   if(!is.character(url)) stop("'link' must be a character vector.")
 
   # Read the page
-  page <- rvest::html_session(url)
+  page <- rvest::session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
   # Get the data
