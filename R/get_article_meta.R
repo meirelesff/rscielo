@@ -58,7 +58,7 @@ get_article_meta <- function(x){
   if(!is.character(url)) stop("'link' must be a character vector.")
 
   # Test the page
-  page <- rvest::html_session(url)
+  page <- rvest::session(url)
   if(httr::status_code(page) != 200) stop("Article not found.")
 
   # Return
