@@ -82,7 +82,7 @@ get_links <- function(journal_id, last_issue = TRUE){
 
   # Get the page
   page <- build_journal_url(journal_id) %>%
-    rvest::html_session()
+    rvest::session()
   if(httr::status_code(page) != 200) stop("Journal not found.")
 
   journal <- rvest::html_nodes(page, "center .nomodel") %>%
